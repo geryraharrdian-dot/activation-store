@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>SweetTape Store: Cloth, masking, OPP and more</title>
-<meta name="description" content="Shop the SweetTape family: cloth, masking, stationery, double-sided and OPP tapes. Order online, track your order and get support.">
+<title>Activation Qontak: Cloth, masking, OPP and more</title>
+<meta name="description" content="Shop the Activation Qontak family: cloth, masking, stationery, double-sided and OPP tapes. Order online, track your order and get support.">
 <meta name="theme-color" content="#034102">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -231,9 +231,9 @@ details.faq div { padding-bottom:16px; }
 <div class="demo-bar" id="demo-bar" hidden>Demo store. Prices, delivery fees and payment details are sample data.</div>
 <header class="site-head">
   <div class="wrap head-in">
-    <a class="brand" href="#/" aria-label="SweetTape home">
+    <a class="brand" href="#/" aria-label="Activation Qontak home">
       <svg viewBox="0 0 32 32" aria-hidden="true"><ellipse cx="16" cy="17" rx="13" ry="11" fill="#F6DD3B" stroke="#034102" stroke-width="2.5"/><path d="M20 6c3-3 6-3 8-2-1 3-4 5-8 4z" fill="#034102"/></svg>
-      SweetTape
+      Activation Qontak
     </a>
     <nav class="nav" aria-label="Main" id="nav">
       <a href="#/shop" data-nav="shop">Shop</a>
@@ -822,15 +822,15 @@ const TITLES = { shop:'Shop', how:'How to order', cart:'Your cart', checkout:'Ch
 function render(fresh) {
   const parts = location.hash.replace(/^#\/?/, '').split('/').filter(Boolean).map(decodeURIComponent);
   const [a, b] = parts;
-  let html, title = 'SweetTape Store: Cloth, masking, OPP and more';
+  let html, title = 'Activation Qontak: Cloth, masking, OPP and more';
   switch (a) {
     case undefined: html = homeView(); break;
-    case 'shop': html = b ? productView(b) : shopView(); title = (b && product(b) ? product(b).name : TITLES.shop) + ' | SweetTape'; break;
-    case 'how': html = howView(); title = TITLES.how + ' | SweetTape'; break;
-    case 'cart': html = cartView(); title = TITLES.cart + ' | SweetTape'; break;
-    case 'checkout': html = checkoutView(); title = TITLES.checkout + ' | SweetTape'; break;
-    case 'order': html = orderView(b || ''); title = TITLES.order + ' | SweetTape'; break;
-    case 'support': html = supportView(); title = TITLES.support + ' | SweetTape'; break;
+    case 'shop': html = b ? productView(b) : shopView(); title = (b && product(b) ? product(b).name : TITLES.shop) + ' | Activation Qontak'; break;
+    case 'how': html = howView(); title = TITLES.how + ' | Activation Qontak'; break;
+    case 'cart': html = cartView(); title = TITLES.cart + ' | Activation Qontak'; break;
+    case 'checkout': html = checkoutView(); title = TITLES.checkout + ' | Activation Qontak'; break;
+    case 'order': html = orderView(b || ''); title = TITLES.order + ' | Activation Qontak'; break;
+    case 'support': html = supportView(); title = TITLES.support + ' | Activation Qontak'; break;
     default: html = notFoundView();
   }
   const main = $('#main');
