@@ -277,12 +277,12 @@ details.faq div { padding-bottom:16px; }
 /* ---------- Config: edit this block for a real launch ---------- */
 const CONFIG = {
   demo: true,
-  currency: { symbol: 'RM' },
-  whatsapp: '',               // e.g. '60123456789' (digits only, with country code). Empty = copy-to-clipboard fallback.
-  freeShippingOver: 60,       // applies to standard delivery only
+  currency: { symbol: 'Rp', locale: 'id-ID' },
+  whatsapp: '',               // e.g. '6281234567890' (digits only, with country code). Empty = copy-to-clipboard fallback.
+  freeShippingOver: 250000,       // applies to standard delivery only
   shipping: [
-    { id:'standard', label:'Standard delivery', note:'3 to 5 working days', fee:8 },
-    { id:'express',  label:'Express delivery',  note:'1 to 2 working days', fee:15 },
+    { id:'standard', label:'Standard delivery', note:'3 to 5 working days', fee:15000 },
+    { id:'express',  label:'Express delivery',  note:'1 to 2 working days', fee:30000 },
     { id:'pickup',   label:'Self pickup',       note:'Ready after the shop confirms', fee:0 }
   ],
   payments: [
@@ -298,39 +298,39 @@ const PRODUCTS = [
     blurb:'Woven, strong and happy to grip rough surfaces. Tears straight by hand.',
     uses:['Bundling cables, pipes and awkward loads','Gripping rough or uneven surfaces','Quick fixes that end up permanent'],
     variants:[
-      { id:'normal', label:'Normal', price:6.9, color:'#6B7782' },
-      { id:'strong', label:'Strong', price:8.9, color:'#4F6B3A' },
-      { id:'black',  label:'Strong Black', price:9.5, color:'#1E1E1E' } ] },
+      { id:'normal', label:'Normal', price:25000, color:'#6B7782' },
+      { id:'strong', label:'Strong', price:32000, color:'#4F6B3A' },
+      { id:'black',  label:'Strong Black', price:35000, color:'#1E1E1E' } ] },
   { id:'masking', name:'Masking ', tag:'The Creative', job:'create', panel:'#F1E3C6', kind:'crepe',
     blurb:'Easygoing  for labels, paint edges and school projects. Peels off clean.',
     uses:['Labelling boxes, jars and folders','Paint work and clean edges','Light bundling'],
     variants:[
-      { id:'single', label:'Single roll', price:3.9, color:'#D8B67A' },
-      { id:'pack6',  label:'Pack of 6', price:21, color:'#D8B67A' } ] },
+      { id:'single', label:'Single roll', price:15000, color:'#D8B67A' },
+      { id:'pack6',  label:'Pack of 6', price:80000, color:'#D8B67A' } ] },
   { id:'stationery', name:'Stationery ', tag:'For the desk', job:'create', panel:'#FBD9E4', kind:'dots',
     blurb:'Desk-size  for wrapping, mending paper and classroom projects.',
     uses:['Wrapping gifts','Mending paper and cards','Everyday desk jobs'],
     variants:[
-      { id:'single', label:'Single roll', price:2.5, color:'#F08FB0' },
-      { id:'pack6',  label:'Pack of 6', price:13.5, color:'#F08FB0' } ] },
+      { id:'single', label:'Single roll', price:9000, color:'#F08FB0' },
+      { id:'pack6',  label:'Pack of 6', price:50000, color:'#F08FB0' } ] },
   { id:'double', name:'Double-sided ', tag:'The invisible fix', job:'create', panel:'#FFE2CF', kind:'stripes',
     blurb:'Tissue double-sided  that holds without showing.',
     uses:['Mounting photos and cards','Hidden layers in craft projects','Quick fixes you do not want to see'],
     variants:[
-      { id:'single', label:'Single roll', price:4.5, color:'#FF9F5A' },
-      { id:'pack6',  label:'Pack of 6', price:24, color:'#FF9F5A' } ] },
+      { id:'single', label:'Single roll', price:17000, color:'#FF9F5A' },
+      { id:'pack6',  label:'Pack of 6', price:90000, color:'#FF9F5A' } ] },
   { id:'opp', name:'OPP ', tag:'Seals parcels', job:'protect', panel:'#D7EEF6', kind:'gloss',
     blurb:'Clear packing  that keeps parcels shut until they arrive.',
     uses:['Sealing boxes and parcels','Shipping online orders','Moving day'],
     variants:[
-      { id:'single', label:'Single roll', price:3.2, color:'#8CCBE0' },
-      { id:'pack6',  label:'Pack of 6', price:17, color:'#8CCBE0' } ] },
+      { id:'single', label:'Single roll', price:12000, color:'#8CCBE0' },
+      { id:'pack6',  label:'Pack of 6', price:65000, color:'#8CCBE0' } ] },
   { id:'opp-quiet', name:'OPP , quiet', tag:'Seals, quietly', job:'protect', panel:'#E3E6FA', kind:'gloss',
     blurb:'The same clear seal with a quieter pull off the roll.',
     uses:['Sealing boxes and parcels','Packing in shared or quiet spaces'],
     variants:[
-      { id:'single', label:'Single roll', price:3.8, color:'#9FA8E8' },
-      { id:'pack6',  label:'Pack of 6', price:20, color:'#9FA8E8' } ] }
+      { id:'single', label:'Single roll', price:14000, color:'#9FA8E8' },
+      { id:'pack6',  label:'Pack of 6', price:75000, color:'#9FA8E8' } ] }
 ];
 
 const JOBS = [
@@ -356,13 +356,18 @@ const FAQ = [
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
 const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const money = n => `${CONFIG.currency.symbol} ${(Math.round(n * 100) / 100).toFixed(2)}`;
+const idrFmt = (() => { try { return new Intl.NumberFormat(CONFIG.currency.locale, { maximumFractionDigits: 0 }); } catch (e) { return null; } })();
+const money = n => {
+  const v = Math.round(n);   // IDR is handled in whole rupiah
+  const s = idrFmt ? idrFmt.format(v) : String(v).replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+  return `${CONFIG.currency.symbol} ${s}`;
+};
 const reduceMotion = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
 const store = {
   get(k, d) { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; } catch (e) { return d; } },
   set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) { /* storage unavailable */ } }
 };
-const K = { cart:'sweet.cart.v1', orders:'sweet.orders.v1', customer:'sweet.customer.v1', voucher:'sweet.voucher.v1' };
+const K = { cart:'sweet.cart.v1', orders:'sweet.orders.v2', customer:'sweet.customer.v1', voucher:'sweet.voucher.v1' };
 let cart = store.get(K.cart, []);
 let voucher = store.get(K.voucher, '');
 let shopFilter = 'all';
@@ -419,7 +424,7 @@ function calc(shipId) {
   const ls = lines();
   const subtotal = ls.reduce((n, l) => n + l.total, 0);
   const vc = CONFIG.vouchers[voucher];
-  const discount = vc ? Math.round(subtotal * vc.percent) / 100 : 0;
+  const discount = vc ? Math.round(subtotal * vc.percent / 100) : 0;
   const ship = CONFIG.shipping.find(s => s.id === shipId) || CONFIG.shipping[0];
   const free = ship.id === 'standard' && subtotal - discount >= CONFIG.freeShippingOver && subtotal > 0;
   const shipping = subtotal === 0 ? 0 : (free ? 0 : ship.fee);
