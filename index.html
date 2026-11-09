@@ -369,7 +369,6 @@ details.faq div { padding-bottom:16px; }
       <ul>
         <li><a href="#/coex">Skenario &amp; S&amp;K WA Coex</a></li>
         <li><a href="#/coex/errors">Cari error WA Coex</a></li>
-        <li><a href="#/coex/log">Riwayat perubahan</a></li>
         <li><a href="#/tutorial">Tutorial</a></li>
       </ul>
     </div>
@@ -487,7 +486,7 @@ function view(sub) {
     <nav class="cx-tabs" aria-label="Bagian Case WA Coex">
       <a href="#/coex" ${tab === 'check' ? 'aria-current="page"' : ''}>1. Skenario &amp; S&amp;K</a>
       <a href="#/coex/errors" ${tab === 'errors' ? 'aria-current="page"' : ''}>2. Cari <i>error</i> <b class="cx-count">${CASES.length}</b></a>
-      <a href="#/coex/log" ${tab === 'log' ? 'aria-current="page"' : ''}>3. Riwayat perubahan</a>
+      
     </nav>
 
     <div class="cx-pane" data-pane="check">
