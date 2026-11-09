@@ -847,7 +847,7 @@ function homeView() {
         </div>
       </div>
       <p class="hero-hint" id="pull-hint" aria-live="polite">halo👋🏼.</p>
-      <p class="hero-sub">Made with Peaceful , one for every job. Order online and we will get it to you.</p>
+      <p class="hero-sub">apabila ada yang disampaikan bisa pencet, icon webchat di kanan bawah 👇</p>
     </div>
   </section>
   ${coexBanner()}`;
@@ -1183,7 +1183,7 @@ const TITLES = { shop:'Shop', how:'How to order', cart:'Your cart', checkout:'Ch
 function render(fresh) {
   const parts = location.hash.replace(/^#\/?/, '').split('/').filter(Boolean).map(decodeURIComponent);
   const [a, b] = parts;
-  let html, title = 'Activation Qontak: Cloth, masking, OPP and more';
+  let html, title = '💙 Activation Qontak';
   switch (a) {
     case undefined: html = homeView(); break;
     case 'shop': html = b ? productView(b) : shopView(); title = (b && product(b) ? product(b).name : TITLES.shop) + ' | Activation Qontak'; break;
