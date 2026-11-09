@@ -1163,7 +1163,7 @@ function initPull() {
     root.style.setProperty('--p', p);
     tab.setAttribute('aria-valuenow', Math.round(p));
     rollEl.style.transform = `rotate(${-p * 8}deg)`;
-    hint.textContent = p >= 96 ? 'terima kasih' : (p < 4 ? 'halo👋🏼' : 'otewe 🏃🏼🏃🏼‍♂️🏃🏼‍♀️');
+    hint.textContent = p >= 96 ? 'terima kasih🙏🏼' : (p < 4 ? 'halo👋🏼' : 'otewe 🏃🏼🏃🏼‍♂️🏃🏼‍♀️');
   };
   const animateTo = t => {
     if (reduceMotion()) return set(t);
@@ -1248,7 +1248,7 @@ const TITLES = { shop:'Shop', how:'How to order', cart:'Your cart', checkout:'Ch
 function render(fresh) {
   const parts = location.hash.replace(/^#\/?/, '').split('/').filter(Boolean).map(decodeURIComponent);
   const [a, b] = parts;
-  let html, title = 'Activation Qontak: Cloth, masking, OPP and more';
+  let html, title = 'Activation Qontak 💙';
   switch (a) {
     case undefined: html = homeView(); break;
     case 'shop': html = b ? productView(b) : shopView(); title = (b && product(b) ? product(b).name : TITLES.shop) + ' | Activation Qontak'; break;
