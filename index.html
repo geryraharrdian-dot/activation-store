@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <!-- Classification: INTERNAL · Recolored with Qontak palette (estimasi, ASSUMPTION) -->
-<title>Activation Qontak Platform</title>
+<title>Activation Qontak Store</title>
 <meta name="description" content="Shop the Activation Qontak family: cloth, masking, stationery, double-sided and OPP s. Order online, track your order, get support, and run the WA Coex simulation case.">
 <meta name="theme-color" content="#2B5FE3">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -85,9 +85,7 @@ main:focus { outline:none; }
 .nav a { text-decoration:none; font-weight:700; padding:10px 14px; border-radius:999px; white-space:nowrap; }
 .nav a:hover { background:color-mix(in srgb, var(--primary) 8%, transparent); }
 .nav a[aria-current="page"] { background:var(--active-bg); color:var(--active-ink); }
-.cart-link { display:inline-flex; align-items:center; gap:8px; text-decoration:none; font-weight:700; min-height:44px; padding:0 16px; border-radius:999px; background:var(--btn-bg); color:var(--btn-ink); }
-.cart-link b { background:var(--btn-ink); color:var(--btn-bg); min-width:24px; height:24px; border-radius:99px; display:inline-grid; place-items:center; font-size:.85rem; padding:0 6px; }
-@media (max-width:860px) { .nav { order:3; width:100%; margin-left:0; } .cart-link { margin-left:auto; } }
+@media (max-width:860px) { .nav { order:3; width:100%; margin-left:0; } }
 
 /* buttons */
 .btn { display:inline-flex; align-items:center; justify-content:center; gap:8px; min-height:48px; padding:0 24px; border-radius:999px; border:2px solid var(--btn-bg); background:var(--btn-bg); color:var(--btn-ink); font:700 1rem var(--body); text-decoration:none; cursor:pointer; }
@@ -107,7 +105,7 @@ main:focus { outline:none; }
 .hero h1 { color:var(--primary); }
 
 .hero-in { padding-block:clamp(28px,6vw,72px) clamp(28px,5vw,56px); }
-.hero h1 { font-size:clamp(4rem,17vw,12rem); letter-spacing:-0.045em; line-height:.86; margin-bottom:.12em; }
+.hero h1 { font-size:clamp(2.8rem,11.9vw,8.4rem); letter-spacing:-0.045em; line-height:.86; margin-bottom:.12em; }
 .pull { --p:0; display:flex; align-items:center; gap:0; margin:8px 0 14px; }
 .pull-roll { width:clamp(96px,16vw,150px); flex:none; will-change:transform; }
 .strip-wrap { position:relative; flex:1; height:clamp(48px,7vw,64px); margin-left:-14px; min-width:0; }
@@ -233,7 +231,7 @@ details.faq div { padding-bottom:16px; }
 .foot-in { display:flex; justify-content:space-between; gap:24px 48px; flex-wrap:wrap; }
 .foot-in ul { list-style:none; padding:0; margin:0; display:grid; gap:6px; }
 .foot-in h4 { margin:0 0 8px; font:800 1rem var(--display); color:#FFFFFF; }
-.foot-word { font:800 clamp(2.4rem,8vw,4.4rem)/.9 var(--display); letter-spacing:-0.04em; color:var(--deep-accent); }
+.foot-word { font:800 clamp(.96rem,3.2vw,1.76rem)/1.1 var(--display); letter-spacing:-0.04em; color:var(--deep-accent); }
 .toast { box-shadow:var(--shadow); position:fixed; left:50%; bottom:calc(env(safe-area-inset-bottom, 0px) + 20px); transform:translate(-50%, 200%); visibility:hidden; background:var(--ink); color:var(--bg); padding:12px 18px; border-radius:999px; font-weight:700; z-index:40; display:flex; gap:14px; align-items:center; max-width:calc(100% - 32px); transition:transform .25s ease; }
 .toast.show { transform:translate(-50%, 0); visibility:visible; }
 .toast a { color:inherit; }
@@ -329,7 +327,7 @@ details.faq div { padding-bottom:16px; }
 ></script>
 <!-- End of Qontak Web Chat V2 -->
 <a class="skip" href="#main">Skip to content</a>
-<div class="demo-bar" id="demo-bar" hidden>Demo store. Prices, delivery fees and payment details are sample data.</div>
+<div class="demo-bar" id="demo-bar" hidden>buka laptop 💻 membaca memo 📝, simulasi praktis, eksplorasi fitur demo 🤫</div>
 <header class="site-head">
   <div class="wrap head-in">
     <a class="brand" href="#/" aria-label="Activation Qontak home">
@@ -340,14 +338,13 @@ details.faq div { padding-bottom:16px; }
       <a href="#/" data-nav="home">Home</a>
       <a href="#/coex" data-nav="coex">Case WA Coex<span class="new">Baru</span></a>
     </nav>
-    <a class="cart-link" href="#/cart" aria-label="Cart"><span>Cart</span> <b id="cart-count">0</b></a>
   </div>
 </header>
 <main id="main" tabindex="-1"></main>
 <footer class="site-foot">
   <div class="wrap foot-in">
     <div>
-      <div class="foot-word">Stick<br>by you</div>
+      <div class="foot-word">© activation 2026</div>
     </div>
     <div>
       <h4>Activation</h4>
@@ -774,7 +771,7 @@ const rollOf = (p, v) => roll(p.kind, (v || p.variants[0]).color, `${p.name} rol
 
 /* ---------- Cart maths ---------- */
 function saveCart() { store.set(K.cart, cart); updateBadge(); }
-function updateBadge() { $('#cart-count').textContent = cart.reduce((n, l) => n + l.qty, 0); }
+function updateBadge() { const el = $('#cart-count'); if (!el) return; el.textContent = cart.reduce((n, l) => n + l.qty, 0); }
 function addToCart(pid, vid, qty = 1) {
   const l = cart.find(x => x.pid === pid && x.vid === vid);
   if (l) l.qty = Math.min(99, l.qty + qty); else cart.push({ pid, vid, qty });
@@ -845,12 +842,11 @@ function homeView() {
         <div class="pull-roll">${roll('plain', '#2B5FE3', 'A  roll being unrolled')}</div>
         <div class="strip-wrap">
           <div class="strip" aria-hidden="true"><span>Peaceful • Peaceful • Peaceful • Peaceful • Peaceful • Peaceful • Peaceful • Peaceful</span></div>
-          <button class="tab" role="slider" aria-label="Pull the " aria-valuemin="0" aria-valuemax="50" aria-valuenow="0">pencet 👆</button>
+          <button class="tab" role="slider" aria-label="Pull the " aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">Pull me</button>
         </div>
       </div>
-      <p class="hero-hint" id="pull-hint" aria-live="polite">Grab the tab and pull.</p>
-      <p class="hero-sub">Made with Peaceful , one for every job. Order online and we will get it to you.</p>
-      <div class="hero-cta"><a class="btn" href="#/shop">Shop the family</a><a class="btn ghost" href="#/how">How to order</a></div>
+      <p class="hero-hint" id="pull-hint" aria-live="polite">pencet aja</p>
+      <p class="hero-sub">dibuat dengan damai, empati dan berbahagia #wargajagawarga.</p>
     </div>
   </section>
   ${coexBanner()}`;
@@ -1147,7 +1143,7 @@ function initPull() {
     root.style.setProperty('--p', p);
     tab.setAttribute('aria-valuenow', Math.round(p));
     rollEl.style.transform = `rotate(${-p * 8}deg)`;
-    hint.textContent = p >= 96 ? 'That is one good fix. Now pick your .' : (p < 4 ? 'Grab the tab and pull.' : 'Keep going.');
+    hint.textContent = p >= 96 ? 'That is one good fix. Now pick your .' : (p < 4 ? 'pencet aja' : 'Keep going.');
   };
   const animateTo = t => {
     if (reduceMotion()) return set(t);
