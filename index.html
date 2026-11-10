@@ -500,6 +500,21 @@ mark, .hc-mark { background:color-mix(in srgb, var(--warning) 38%, transparent);
 .hc-hl span { flex:1; min-width:180px; }
 .hc-hl button { min-height:34px; padding:0 12px; font-size:.85rem; }
 .hc-q-note { display:block; font-size:.8rem; color:var(--muted); font-weight:400; margin-top:2px; }
+/* Contact: demo channels to start a conversation */
+.ct-groups { display:grid; gap:clamp(28px,4vw,40px); }
+.ct-groups h2 { font-size:clamp(1.3rem,2.6vw,1.7rem); margin-bottom:14px; }
+.ct-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr)); gap:16px; }
+.ct { display:flex; flex-direction:column; gap:12px; background:var(--surface); border:1px solid var(--edge); border-radius:14px; padding:18px; min-width:0; box-shadow:var(--shadow); }
+.ct-top { display:flex; gap:12px; align-items:center; }
+.ct-top h3 { font:800 1.05rem/1.25 var(--display); }
+.ct-top small { display:block; color:var(--muted); font-size:.8rem; font-weight:700; text-transform:uppercase; letter-spacing:.06em; }
+.ct-acc { display:grid; gap:8px; }
+.ct-row { display:flex; align-items:center; gap:8px; flex-wrap:wrap; padding:10px 12px; border-radius:10px; background:var(--bg); }
+.ct-row code { flex:1 1 100%; min-width:0; font:700 .98rem var(--body); font-variant-numeric:tabular-nums; overflow-wrap:anywhere; color:var(--ink); }
+.ct-row .btn { min-height:36px; padding:0 14px; font-size:.85rem; }
+.ct-note { font-size:.86rem; color:var(--muted); margin:0; }
+.ct-intro { background:var(--tint); border-radius:14px; padding:14px 18px; margin-bottom:28px; font-size:.95rem; }
+.ct-intro p { margin:0; max-width:none; }
 </style>
 </head>
 <body>
@@ -523,6 +538,7 @@ mark, .hc-mark { background:color-mix(in srgb, var(--warning) 38%, transparent);
       <a href="#/coex" data-nav="coex">Case WA Coex<span class="new">Baru</span></a>
       <a href="#/tutorial" data-nav="tutorial">Tutorial</a>
       <a href="#/flow" data-nav="flow">WA API Flow Setting</a>
+      <a href="#/contact" data-nav="contact">Contact</a>
     </nav>
   </div>
 </header>
@@ -540,6 +556,7 @@ mark, .hc-mark { background:color-mix(in srgb, var(--warning) 38%, transparent);
         <li><a href="#/coex/errors">Cari error WA Coex</a></li>
         <li><a href="#/tutorial">Tutorial</a></li>
         <li><a href="#/flow">WA API Flow Setting</a></li>
+        <li><a href="#/contact">Contact</a></li>
       </ul>
     </div>
   </div>
@@ -1961,8 +1978,86 @@ document.addEventListener('click', e => {
 });
 function mountHelp() { const q = hcPendingQ; hcPendingQ = ''; if (q) { hcApplyHighlight(q); const f = $('#hc-find'); if (f) f.value = q; } }
 
+/* ---------- Contact: start a conversation with the demo accounts ---------- */
+const CT_ICONS = {
+  phone:'<path d="M6.5 3.5h3l1.5 4-2 1.3a10 10 0 0 0 6.2 6.2l1.3-2 4 1.5v3a2 2 0 0 1-2.2 2A17 17 0 0 1 4.5 5.7a2 2 0 0 1 2-2.2z"/>',
+  messenger:'<path d="M12 3.5c-4.9 0-8.5 3.5-8.5 8 0 2.4 1 4.5 2.8 6v3l2.8-1.5c.9.3 1.9.4 2.9.4 4.9 0 8.5-3.5 8.5-8s-3.6-7.9-8.5-7.9z"/><path d="M7.5 13.5l3-3 2.2 2 3.8-3.2-3 3.2-2.2-2z"/>',
+  mail:'<rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M3.5 7l8.5 6 8.5-6"/>',
+  pin:'<path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0C18.5 15.4 12 21 12 21z"/><circle cx="12" cy="10" r="2.4"/>',
+  line:'<path d="M12 4c-5 0-9 3.2-9 7.2 0 3.5 3.1 6.5 7.4 7.1l-.4 2.4 3.3-2.4c4.4-.5 7.7-3.5 7.7-7.1C21 7.2 17 4 12 4z"/><path d="M7.5 9.5v4h2M11.5 9.5v4M14 13.5v-4l2.5 4v-4"/>',
+  mobile:'<rect x="6.5" y="2.5" width="11" height="19" rx="2.5"/><path d="M10.5 18.5h3"/>',
+  send:'<path d="M21 3.5L3 10.8l6.8 2.4L12.3 20z"/><path d="M21 3.5l-11.2 9.7"/>',
+  store:'<path d="M4 9.5L5.5 4h13L20 9.5"/><path d="M4 9.5a2.7 2.7 0 0 0 5.3 0 2.7 2.7 0 0 0 5.4 0 2.7 2.7 0 0 0 5.3 0"/><path d="M5.5 11.5V20h13v-8.5"/>',
+  cart:'<path d="M3 4h2.5l2.2 11h10.6L20.5 8H7"/><circle cx="9.5" cy="19" r="1.4"/><circle cx="17" cy="19" r="1.4"/>'
+};
+const ctIcon = (k, tone) => `<span class="hc-ic" style="--tone:${tone}" aria-hidden="true"><svg viewBox="0 0 24 24">${CT_ICONS[k] || HC_ICONS[k]}</svg></span>`;
+/* Each account: [label shown, link or null, copy value or null] */
+const CT_GROUPS = [
+  { name:'Chat & panggilan', items:[
+    { icon:'whatsapp', tone:'var(--ok)', kind:'WhatsApp', title:'WhatsApp chat', act:'Mulai chat',
+      acc:[['+1 555-487-8416', 'https://wa.me/15554878416', '+15554878416'], ['+1 555-764-1644', 'https://wa.me/15557641644', '+15557641644']],
+      note:'Terbuka di aplikasi WhatsApp atau WhatsApp Web.' },
+    { icon:'phone', tone:'var(--ok)', kind:'WhatsApp', title:'WhatsApp call', act:'Buka chat',
+      acc:[['+1 555-487-8416', 'https://wa.me/15554878416', '+15554878416'], ['+1 555-764-1644', 'https://wa.me/15557641644', '+15557641644']],
+      note:'Tidak ada link untuk langsung menelepon. Buka chat-nya di aplikasi WhatsApp di HP, lalu tekan ikon telepon.' },
+    { icon:'meta', tone:'#EC4899', kind:'Instagram', title:'Instagram DM & Comment', act:'Kirim DM',
+      acc:[['@activationqontak_demo', 'https://ig.me/m/activationqontak_demo', null], ['@sunday.kukiss.store', 'https://ig.me/m/sunday.kukiss.store', null]],
+      note:'Untuk tes comment, buka profilnya lalu komentari salah satu post: <a href="https://www.instagram.com/activationqontak_demo" target="_blank" rel="noopener">activationqontak_demo</a> · <a href="https://www.instagram.com/sunday.kukiss.store" target="_blank" rel="noopener">sunday.kukiss.store</a>.' },
+    { icon:'messenger', tone:'var(--primary)', kind:'Facebook', title:'Facebook Messenger', act:'Buka halaman',
+      acc:[['Activation Qontak Testing', 'https://www.facebook.com/profile.php?id=61577365194762', null]],
+      note:'Klik tombol Message di halaman Facebook-nya untuk memulai percakapan.' },
+    { icon:'send', tone:'#0EA5E9', kind:'Telegram', title:'Telegram bot', act:'Buka bot',
+      acc:[['@activationqontak360_bot', 'https://t.me/activationqontak360_bot', '@activationqontak360_bot']],
+      note:'Nama bot: activationbot. Tekan Start untuk memulai percakapan.' },
+    { icon:'line', tone:'var(--ok)', kind:'LINE', title:'LINE: Calls & Messages', act:null,
+      acc:[['MAKARESTO', null, 'MAKARESTO']],
+      note:'Cari akun MAKARESTO di aplikasi LINE, tambahkan sebagai teman, lalu kirim pesan.' } ] },
+  { name:'Email, profil bisnis & aplikasi', items:[
+    { icon:'mail', tone:'#F97316', kind:'Email', title:'Email inbox', act:'Tulis email',
+      acc:[['ats.qontak@gmail.com', 'mailto:ats.qontak@gmail.com', 'ats.qontak@gmail.com']],
+      note:'Kalau tombol tidak membuka aplikasi email, salin alamatnya.' },
+    { icon:'pin', tone:'#14B8A6', kind:'Google', title:'Google My Business', act:'Buka profil',
+      acc:[['Profil bisnis di Google', 'https://share.google/QyqmQonn4Q06SWGdL', null]],
+      note:'Tes chat dan ulasan dari profil bisnis di Google Search atau Maps.' },
+    { icon:'mobile', tone:'#7C5CFC', kind:'Mobile chat', title:'Mobile App ATS Qontak', act:'Buka di Play Store',
+      acc:[['com.atshub.app', 'https://play.google.com/store/apps/details?id=com.atshub.app', 'com.atshub.app']],
+      note:'Khusus Android. Pasang aplikasinya, lalu kirim pesan dari menu chat di aplikasi.' } ] },
+  { name:'E-commerce', items:[
+    { icon:'ecommerce', tone:'#F97316', kind:'Shopee', title:'Shopee Chat', act:'Buka toko',
+      acc:[['alfazzaa.store', 'https://shopee.co.id/alfazzaa.store', null]],
+      note:'Klik Chat Sekarang di halaman toko. Perlu login akun Shopee pembeli.' },
+    { icon:'store', tone:'#EC4899', kind:'Lazada', title:'Lazada Chat', act:'Buka Lazada',
+      acc:[['Seller ID: ID69KL4IU6', 'https://www.lazada.co.id/', 'ID69KL4IU6']],
+      note:'Cari toko dengan Seller ID di atas, lalu klik Chat di halaman toko. Perlu login akun Lazada pembeli.' },
+    { icon:'cart', tone:'var(--ok)', kind:'Tokopedia & TikTok Shop', title:'Tokopedia & TikTok Shop', act:'Cari toko',
+      acc:[['ATStudio MQ', 'https://www.tokopedia.com/search?st=shop&q=ATStudio%20MQ', 'ATStudio MQ']],
+      note:'Buka toko ATStudio MQ, lalu klik Chat Penjual. Perlu login akun pembeli.' } ] }
+];
+function contactView() {
+  const total = CT_GROUPS.reduce((n, g) => n + g.items.length, 0);
+  return `<section class="section"><div class="wrap">
+    <div class="section-head"><div><h1>Contact</h1>
+      <p class="muted" style="margin:8px 0 0">Mulai percakapan ke akun demo Activation Qontak lewat ${total} channel, lalu lihat pesannya masuk di Omnichannel Qontak.</p></div></div>
+    <div class="ct-intro"><p>Semua akun di bawah adalah akun demo untuk simulasi. Jangan kirim data pribadi atau data Client sungguhan.</p></div>
+    <div class="ct-groups">${CT_GROUPS.map(g => `<section aria-label="${esc(g.name)}"><h2>${esc(g.name)}</h2><div class="ct-grid">${g.items.map(c => `
+      <article class="ct">
+        <div class="ct-top">${ctIcon(c.icon, c.tone)}<div><small>${esc(c.kind)}</small><h3>${esc(c.title)}</h3></div></div>
+        <div class="ct-acc">${c.acc.map(([label, href, copy]) => `<div class="ct-row"><code>${esc(label)}</code>
+          ${href && c.act ? `<a class="btn small" href="${href}" ${href.startsWith('mailto:') ? '' : 'target="_blank" rel="noopener"'}>${esc(c.act)}</a>` : ''}
+          ${copy ? `<button type="button" class="btn ghost small" data-ctcopy="${esc(copy)}">Salin</button>` : ''}</div>`).join('')}</div>
+        <p class="ct-note">${c.note}</p>
+      </article>`).join('')}</div></section>`).join('')}</div>
+  </div></section>`;
+}
+document.addEventListener('click', e => {
+  const b = e.target.closest('[data-ctcopy]'); if (!b) return;
+  const v = b.dataset.ctcopy;
+  const fallback = () => { const code = b.parentElement.querySelector('code'); const r = document.createRange(); r.selectNodeContents(code); const sel = getSelection(); sel.removeAllRanges(); sel.addRange(r); toast('Sudah diblok. Tekan Ctrl+C untuk menyalin.'); };
+  if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(v).then(() => toast('Disalin: ' + esc(v))).catch(fallback); else fallback();
+});
+
 /* ---------- Router ---------- */
-const TITLES = { shop:'Shop', how:'How to order', cart:'Your cart', checkout:'Checkout', order:'Your order', support:'Support', coex:'Case WA Coex', tutorial:'Tutorial', flow:'WA API Flow Setting' };
+const TITLES = { shop:'Shop', how:'How to order', cart:'Your cart', checkout:'Checkout', order:'Your order', support:'Support', coex:'Case WA Coex', tutorial:'Tutorial', flow:'WA API Flow Setting', contact:'Contact' };
 function render(fresh) {
   const parts = location.hash.replace(/^#\/?/, '').split('/').filter(Boolean).map(decodeURIComponent);
   const [a, b] = parts;
@@ -1976,6 +2071,7 @@ function render(fresh) {
     case 'order': html = orderView(b || ''); title = TITLES.order + ' | Activation Qontak'; break;
     case 'support': html = supportView(); title = TITLES.support + ' | Activation Qontak'; break;
     case 'coex': html = window.COEX ? COEX.view(b) : notFoundView(); title = TITLES.coex + ' | Activation Qontak'; break;
+    case 'contact': html = contactView(); title = TITLES.contact + ' | Activation Qontak'; break;
     case 'help': html = hcArticleView(b || ''); title = (hcTitle(b) || 'Help Center') + ' | Activation Qontak'; break;
     case 'flow': html = flowView(); title = TITLES.flow + ' | Activation Qontak'; break;
     case 'tutorial': html = tutorialView(); title = TITLES.tutorial + ' | Activation Qontak'; break;
