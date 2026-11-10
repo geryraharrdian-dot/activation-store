@@ -334,12 +334,12 @@ details.faq div { padding-bottom:16px; }
 .tut figcaption b { font:800 1.1rem var(--display); }
 .tut figcaption a { font-size:.9rem; font-weight:700; color:var(--primary); }
 
-/* Featured tutorial video (self-hosted mp4, autoplays muted while in view) */
+/* Featured tutorial video (YouTube, autoplays muted while in view) */
 .tut-feature { margin-bottom:32px; }
-.tut-feature .tut-frame { aspect-ratio:1920/1078; background:#000; }
-.tut-feature video { position:absolute; inset:0; width:100%; height:100%; object-fit:contain; background:#000; display:block; }
+.tut-feature .tut-frame { aspect-ratio:16/9; background:#000; }
 .tut-feature figcaption { display:flex; flex-direction:column; align-items:flex-start; gap:2px; }
 .tut-feature figcaption b { font-size:1.3rem; }
+.tut-feature figcaption a { font-weight:700; color:var(--primary); }
 .tut-feature .tut-badge { display:inline-block; font-size:.78rem; font-weight:700; padding:2px 10px; border-radius:99px; background:var(--active-bg); color:var(--active-ink); margin-bottom:4px; }
 </style>
 </head>
@@ -1253,30 +1253,37 @@ document.addEventListener('click', e => {
 });
 
 
-/* Featured tutorial: keep the mp4 in the same folder as this HTML file. */
-const FEATURED = { src:'wa-coex-multiple-waba.mp4', title:'Tutorial integrasi WA Coex & Multiple WABA' };
+/* Featured tutorial (YouTube). Autoplays muted and loops; plays while in view, pauses when scrolled away. */
+const FEATURED = { id:'pAEOIOpvBAM', title:'Tutorial integrasi WA Coex & Multiple WABA' };
 function featuredHTML() {
+  const auto = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const q = `enablejsapi=1&mute=1&playsinline=1&rel=0&loop=1&playlist=${FEATURED.id}` + (auto ? '&autoplay=1' : '');
   return `<figure class="tut tut-feature">
     <div class="tut-frame">
-      <video src="${FEATURED.src}" muted playsinline loop controls preload="metadata" data-autoplay aria-label="${esc(FEATURED.title)}"></video>
+      <iframe data-autoplay src="https://www.youtube-nocookie.com/embed/${FEATURED.id}?${q}" title="${esc(FEATURED.title)}" loading="lazy"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
     </div>
     <figcaption><span class="tut-badge">Video utama</span><b>${esc(FEATURED.title)}</b>
-      <span class="muted small">Video berputar otomatis tanpa suara. Klik ikon speaker di video untuk menyalakan suara.</span></figcaption>
+      <span class="muted small">Video berputar otomatis tanpa suara. Klik ikon speaker di video untuk menyalakan suara. <a href="https://youtu.be/${FEATURED.id}" target="_blank" rel="noopener">Buka di YouTube ↗</a></span></figcaption>
   </figure>`;
 }
-/* Browsers allow autoplay only when muted. Play while at least 40% visible, pause when scrolled away. */
+/* Browsers allow autoplay only when muted. Uses the YouTube player's postMessage commands to play/pause by visibility. */
 let autoplayObserver;
+function ytCmd(f, func) { try { f.contentWindow.postMessage(JSON.stringify({ event:'command', func, args:[] }), '*'); } catch (e) {} }
 function mountAutoplay() {
   if (autoplayObserver) autoplayObserver.disconnect();
-  const vids = $$('video[data-autoplay]'); if (!vids.length) return;
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  if (!('IntersectionObserver' in window)) { vids.forEach(v => v.play().catch(() => {})); return; }
+  const frames = $$('iframe[data-autoplay]'); if (!frames.length) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) return;
   autoplayObserver = new IntersectionObserver(entries => entries.forEach(en => {
-    const v = en.target;
-    if (en.isIntersecting) v.play().catch(() => {}); else v.pause();
+    ytCmd(en.target, en.isIntersecting ? 'playVideo' : 'pauseVideo');
   }), { threshold: 0.4 });
-  vids.forEach(v => autoplayObserver.observe(v));
+  frames.forEach(f => { autoplayObserver.observe(f); f.addEventListener('load', () => mountAutoplay.check(f)); });
 }
+mountAutoplay.check = f => {
+  const r = f.getBoundingClientRect(), h = window.innerHeight || 0;
+  const vis = Math.max(0, Math.min(r.bottom, h) - Math.max(r.top, 0)) / (r.height || 1);
+  ytCmd(f, vis >= 0.4 ? 'playVideo' : 'pauseVideo');
+};
 
 /* ---------- Router ---------- */
 const TITLES = { shop:'Shop', how:'How to order', cart:'Your cart', checkout:'Checkout', order:'Your order', support:'Support', coex:'Case WA Coex', tutorial:'Tutorial' };
