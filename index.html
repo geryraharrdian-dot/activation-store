@@ -342,7 +342,7 @@ details.faq div { padding-bottom:16px; }
 .tut-feature figcaption a { font-weight:700; color:var(--primary); }
 .tut-feature .tut-badge { display:inline-block; font-size:.78rem; font-weight:700; padding:2px 10px; border-radius:99px; background:var(--active-bg); color:var(--active-ink); margin-bottom:4px; }
 
-/* WA API Flow Setting: in-page Flow builder (editor + live preview + Flow JSON export) */
+/* WA API Flow: in-page Flow builder (editor + live preview + Flow JSON export) */
 .flow-launch { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:12px 24px; background:var(--tint); border-radius:14px; padding:14px 18px; margin-bottom:28px; }
 .flow-launch p { margin:0; font-size:.95rem; max-width:70ch; }
 .flow-launch .hero-cta { gap:8px; }
@@ -537,7 +537,7 @@ mark, .hc-mark { background:color-mix(in srgb, var(--warning) 38%, transparent);
       <a href="#/" data-nav="home">Home</a>
       <a href="#/coex" data-nav="coex">Case WA Coex<span class="new">Baru</span></a>
       <a href="#/tutorial" data-nav="tutorial">Tutorial</a>
-      <a href="#/flow" data-nav="flow">WA API Flow Setting</a>
+      <a href="#/flow" data-nav="flow">WA API Flow</a>
       <a href="#/contact" data-nav="contact">Contact</a>
     </nav>
   </div>
@@ -555,7 +555,7 @@ mark, .hc-mark { background:color-mix(in srgb, var(--warning) 38%, transparent);
         <li><a href="#/coex">Skenario &amp; S&amp;K WA Coex</a></li>
         <li><a href="#/coex/errors">Cari error WA Coex</a></li>
         <li><a href="#/tutorial">Tutorial</a></li>
-        <li><a href="#/flow">WA API Flow Setting</a></li>
+        <li><a href="#/flow">WA API Flow</a></li>
         <li><a href="#/contact">Contact</a></li>
       </ul>
     </div>
@@ -1466,7 +1466,7 @@ mountAutoplay.check = f => {
 };
 
 
-/* ---------- WA API Flow Setting: Flow builder ---------- */
+/* ---------- WA API Flow: Flow builder ---------- */
 /* Meta does not allow its Playground inside an iframe, so this page rebuilds the same editing pattern:
    screens, content blocks, a live phone preview and a Flow JSON export. */
 const FLOW_URL = 'https://developers.facebook.com/documentation/business-messaging/whatsapp/flows/playground';
@@ -1654,7 +1654,7 @@ function fbRender(all) {
 }
 function flowView() {
   return `<section class="section"><div class="wrap">
-    <div class="section-head"><div><h1>WA API Flow Setting</h1>
+    <div class="section-head"><div><h1>WA API Flow</h1>
       <p class="muted" style="margin:8px 0 0">Susun WhatsApp Flow untuk Client langsung di halaman ini: atur layar dan konten, cek pratinjau, lalu salin Flow JSON.</p></div></div>
     <div class="flow-launch">
       <p>Format editor ini mengikuti Flows Playground milik Meta. Untuk validasi akhir, tempel Flow JSON di Playground asli atau di WhatsApp Manager.</p>
@@ -2057,7 +2057,7 @@ document.addEventListener('click', e => {
 });
 
 /* ---------- Router ---------- */
-const TITLES = { shop:'Shop', how:'How to order', cart:'Your cart', checkout:'Checkout', order:'Your order', support:'Support', coex:'Case WA Coex', tutorial:'Tutorial', flow:'WA API Flow Setting', contact:'Contact' };
+const TITLES = { shop:'Shop', how:'How to order', cart:'Your cart', checkout:'Checkout', order:'Your order', support:'Support', coex:'Case WA Coex', tutorial:'Tutorial', flow:'WA API Flow', contact:'Contact' };
 function render(fresh) {
   const parts = location.hash.replace(/^#\/?/, '').split('/').filter(Boolean).map(decodeURIComponent);
   const [a, b] = parts;
