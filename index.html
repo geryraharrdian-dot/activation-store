@@ -346,7 +346,7 @@ details.faq div { padding-bottom:16px; }
 .tut-feature figcaption a { font-weight:700; color:var(--primary); }
 .tut-feature .tut-badge { display:inline-block; font-size:.78rem; font-weight:700; padding:2px 10px; border-radius:99px; background:var(--active-bg); color:var(--active-ink); margin-bottom:4px; }
 
-/* WA API Flow: in-page Flow builder (editor + live preview + Flow JSON export) */
+/* WA API Flow Setting: in-page Flow builder (editor + live preview + Flow JSON export) */
 .flow-launch { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:12px 24px; background:var(--tint); border-radius:14px; padding:14px 18px; margin-bottom:28px; }
 .flow-launch p { margin:0; font-size:.95rem; max-width:70ch; }
 .flow-launch .hero-cta { gap:8px; }
@@ -529,6 +529,13 @@ mark, .hc-mark { background:color-mix(in srgb, var(--warning) 38%, transparent);
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .theme-btn .sun { display:none; } :root:not([data-theme="light"]) .theme-btn .moon { display:block; } }
 body, .site-head, .card, .box, .fb, .ct, .hc-group, .tpl { transition:background-color .2s, color .2s, border-color .2s; }
 @media (max-width:860px) { .theme-btn { margin-left:auto; } }
+/* Coex tips before onboarding */
+.cx-tips { margin-top:32px; }
+.cx-tips h2 { display:flex; align-items:center; gap:8px; }
+.cx-tips > p { margin:6px 0 14px; }
+.cx-tips ul { margin:0; padding:16px 20px 16px 38px; background:var(--surface); border:1px solid var(--edge); border-radius:14px; display:grid; gap:10px; }
+.cx-tips li { line-height:1.6; }
+.cx-tips a { color:var(--primary); font-weight:600; overflow-wrap:anywhere; }
 </style>
 </head>
 <body>
@@ -551,7 +558,7 @@ body, .site-head, .card, .box, .fb, .ct, .hc-group, .tpl { transition:background
       <a href="#/" data-nav="home">Home</a>
       <a href="#/coex" data-nav="coex">Case WA Coex<span class="new">Baru</span></a>
       <a href="#/tutorial" data-nav="tutorial">Tutorial</a>
-      <a href="#/flow" data-nav="flow">WA API Flow</a>
+      <a href="#/flow" data-nav="flow">WA API Flow Setting</a>
       <a href="#/contact" data-nav="contact">Contact</a>
     </nav>
     <button type="button" class="theme-btn" id="theme-btn" aria-label="Ganti ke mode gelap" title="Ganti tema terang/gelap">
@@ -573,7 +580,7 @@ body, .site-head, .card, .box, .fb, .ct, .hc-group, .tpl { transition:background
         <li><a href="#/coex">Skenario &amp; S&amp;K WA Coex</a></li>
         <li><a href="#/coex/errors">Cari error WA Coex</a></li>
         <li><a href="#/tutorial">Tutorial</a></li>
-        <li><a href="#/flow">WA API Flow</a></li>
+        <li><a href="#/flow">WA API Flow Setting</a></li>
         <li><a href="#/contact">Contact</a></li>
       </ul>
     </div>
@@ -700,6 +707,14 @@ function view(sub) {
       <div class="cx-paths" role="group" aria-label="Skenario">
         ${PATHS.map(p => `<button class="cx-path" data-cx-path="${p}" aria-pressed="${state.path === p}"><strong>${PATHNAME[p]}</strong><span>${PATHDESC[p]}</span></button>`).join('')}
       </div>
+      <section class="cx-tips" aria-labelledby="cx-tips-h">
+        <h2 class="cx-h2" id="cx-tips-h"><span aria-hidden="true">💡</span> Tips</h2>
+        <p class="muted">Lakukan sebelum <i>onboarding</i> untuk mencegah <i>error</i> di tengah proses.</p>
+        <ul>
+          <li>Cek akun FBBM dan FB personal melalui menu <i>Business Support Home</i>, pastikan tidak ada <i>issues</i>: <a href="https://business.facebook.com/business-support-home/" target="_blank" rel="noopener">business.facebook.com/business-support-home</a>. Apabila ada <i>issues</i>, ajukan banding terlebih dahulu dengan mengikuti instruksi Meta yang sudah ditentukan.</li>
+          <li>Cek akun WhatsApp Business, apakah ada <i>Business Tools</i> yang aktif (Meta One, Meta Business Agent, <i>Broadcast</i>, <i>Automatic Event</i>, dll.). Pastikan semuanya dinonaktifkan.</li>
+        </ul>
+      </section>
       <div class="two-col" style="margin-top:32px">
         <div class="box">
           <h2 style="font-size:1.6rem">Syarat &amp; ketentuan</h2>
@@ -1484,7 +1499,7 @@ mountAutoplay.check = f => {
 };
 
 
-/* ---------- WA API Flow: Flow builder ---------- */
+/* ---------- WA API Flow Setting: Flow builder ---------- */
 /* Meta does not allow its Playground inside an iframe, so this page rebuilds the same editing pattern:
    screens, content blocks, a live phone preview and a Flow JSON export. */
 const FLOW_URL = 'https://developers.facebook.com/documentation/business-messaging/whatsapp/flows/playground';
@@ -1672,7 +1687,7 @@ function fbRender(all) {
 }
 function flowView() {
   return `<section class="section"><div class="wrap">
-    <div class="section-head"><div><h1>WA API Flow</h1>
+    <div class="section-head"><div><h1>WA API Flow Setting</h1>
       <p class="muted" style="margin:8px 0 0">Susun WhatsApp Flow untuk Client langsung di halaman ini: atur layar dan konten, cek pratinjau, lalu salin Flow JSON.</p></div></div>
     <div class="flow-launch">
       <p>Format editor ini mengikuti Flows Playground milik Meta. Untuk validasi akhir, tempel Flow JSON di Playground asli atau di WhatsApp Manager.</p>
@@ -2035,7 +2050,7 @@ const CT_GROUPS = [
       acc:[['ats.qontak@gmail.com', 'mailto:ats.qontak@gmail.com', 'ats.qontak@gmail.com']],
       note:'Kalau tombol tidak membuka aplikasi email, salin alamatnya.' },
     { icon:'pin', tone:'#14B8A6', kind:'Google', title:'Google My Business', act:'Buka profil',
-      acc:[['Nata Garden', 'https://share.google/QyqmQonn4Q06SWGdL', null]],
+      acc:[['Profil bisnis di Google', 'https://share.google/QyqmQonn4Q06SWGdL', null]],
       note:'Tes chat dan ulasan dari profil bisnis di Google Search atau Maps.' },
     { icon:'mobile', tone:'#7C5CFC', kind:'Mobile chat', title:'Mobile App ATS Qontak', act:'Buka di Play Store',
       acc:[['com.atshub.app', 'https://play.google.com/store/apps/details?id=com.atshub.app', 'com.atshub.app']],
@@ -2055,7 +2070,7 @@ function contactView() {
   return `<section class="section"><div class="wrap">
     <div class="section-head"><div><h1>Contact</h1>
       <p class="muted" style="margin:8px 0 0">Mulai percakapan ke akun demo Activation Qontak lewat beberapa channel, lalu lihat pesannya masuk di Omnichannel Qontak.</p></div></div>
-    <div class="ct-intro"><p>⚠️Semua akun di bawah adalah akun demo untuk simulasi.</p></div>
+    <div class="ct-intro"><p>Semua akun di bawah adalah akun demo untuk simulasi. Jangan kirim data pribadi atau data Client sungguhan.</p></div>
     <div class="ct-groups">${CT_GROUPS.map(g => `<section aria-label="${esc(g.name)}"><h2>${esc(g.name)}</h2><div class="ct-grid">${g.items.map(c => `
       <article class="ct">
         <div class="ct-top">${ctIcon(c.icon, c.tone)}<div><small>${esc(c.kind)}</small><h3>${esc(c.title)}</h3></div></div>
@@ -2095,7 +2110,7 @@ try { matchMedia('(prefers-color-scheme: dark)').addEventListener('change', them
 themeSync();
 
 /* ---------- Router ---------- */
-const TITLES = { shop:'Shop', how:'How to order', cart:'Your cart', checkout:'Checkout', order:'Your order', support:'Support', coex:'Case WA Coex', tutorial:'Tutorial', flow:'WA API Flow', contact:'Contact' };
+const TITLES = { shop:'Shop', how:'How to order', cart:'Your cart', checkout:'Checkout', order:'Your order', support:'Support', coex:'Case WA Coex', tutorial:'Tutorial', flow:'WA API Flow Setting', contact:'Contact' };
 function render(fresh) {
   const parts = location.hash.replace(/^#\/?/, '').split('/').filter(Boolean).map(decodeURIComponent);
   const [a, b] = parts;
