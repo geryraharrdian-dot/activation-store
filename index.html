@@ -90,7 +90,7 @@ main:focus { outline:none; }
 .nav a { text-decoration:none; font-weight:700; padding:10px 14px; border-radius:999px; white-space:nowrap; }
 .nav a:hover { background:color-mix(in srgb, var(--primary) 8%, transparent); }
 .nav a[aria-current="page"] { background:var(--active-bg); color:var(--active-ink); }
-@media (max-width:1100px) { .nav { order:3; width:100%; margin-left:0; } }
+@media (max-width:1150px) { .nav { order:3; width:100%; margin-left:0; } }
 
 /* buttons */
 .btn { display:inline-flex; align-items:center; justify-content:center; gap:8px; min-height:48px; padding:0 24px; border-radius:999px; border:2px solid var(--btn-bg); background:var(--btn-bg); color:var(--btn-ink); font:700 1rem var(--body); text-decoration:none; cursor:pointer; }
@@ -346,7 +346,7 @@ details.faq div { padding-bottom:16px; }
 .tut-feature figcaption a { font-weight:700; color:var(--primary); }
 .tut-feature .tut-badge { display:inline-block; font-size:.78rem; font-weight:700; padding:2px 10px; border-radius:99px; background:var(--active-bg); color:var(--active-ink); margin-bottom:4px; }
 
-/* WA API Flow: in-page Flow builder (editor + live preview + Flow JSON export) */
+/* WA API Flow Setting: in-page Flow builder (editor + live preview + Flow JSON export) */
 .flow-launch { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:12px 24px; background:var(--tint); border-radius:14px; padding:14px 18px; margin-bottom:28px; }
 .flow-launch p { margin:0; font-size:.95rem; max-width:70ch; }
 .flow-launch .hero-cta { gap:8px; }
@@ -414,7 +414,7 @@ details.faq div { padding-bottom:16px; }
 .flow-sub { margin-top:clamp(40px,6vw,64px); }
 .flow-sub h2 { font-size:clamp(1.5rem,3vw,2rem); margin-bottom:20px; }
 @media (max-width:900px) { .fb { grid-template-columns:minmax(0,1fr); } .fb-ed { border-right:0; border-bottom:1px solid var(--edge); } }
-@media (max-width:1100px) { .nav { flex-wrap:wrap; overflow:visible; } .nav a { padding:8px 12px; } }
+@media (max-width:1150px) { .nav { flex-wrap:wrap; overflow:visible; } .nav a { padding:8px 12px; } }
 /* Help Center links: Multi-channel integration */
 .hc { margin-top:clamp(40px,6vw,64px); }
 .hc-head { display:flex; justify-content:space-between; align-items:end; gap:12px 24px; flex-wrap:wrap; margin-bottom:20px; }
@@ -528,7 +528,7 @@ mark, .hc-mark { background:color-mix(in srgb, var(--warning) 38%, transparent);
 :root[data-theme="dark"] .theme-btn .moon { display:block; }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .theme-btn .sun { display:none; } :root:not([data-theme="light"]) .theme-btn .moon { display:block; } }
 body, .site-head, .card, .box, .fb, .ct, .hc-group, .tpl { transition:background-color .2s, color .2s, border-color .2s; }
-@media (max-width:1100px) { .theme-btn { margin-left:auto; } }
+@media (max-width:1150px) { .theme-btn { margin-left:auto; } }
 /* Coex tips before onboarding */
 .cx-tips { margin-top:32px; }
 .cx-tips h2 { display:flex; align-items:center; gap:8px; }
@@ -620,8 +620,47 @@ body, .site-head, .card, .box, .fb, .ct, .hc-group, .tpl { transition:background
 .gs-hint { display:flex; gap:14px; flex-wrap:wrap; padding:8px 14px; border-top:1px solid var(--line); font-size:.78rem; color:var(--muted); }
 .gs-hint kbd { font:700 .72rem var(--body); padding:1px 5px; border-radius:5px; border:1px solid var(--edge); background:var(--bg); }
 .gs-flash { animation:cxflash 1.6s ease; border-radius:12px; }
-@media (max-width:1180px) { .gs-btn { padding:0; width:44px; justify-content:center; } .gs-btn .gs-lbl { display:none; } }
-@media (max-width:1100px) { .gs-btn { margin-left:auto; } .theme-btn { margin-left:0; } .head-in { column-gap:8px; } .brand { font-size:1.35rem; } }
+.gs-btn { padding:0; width:44px; justify-content:center; } .gs-btn .gs-lbl { display:none; }
+@media (min-width:1151px) { .nav a { padding:10px 11px; } .head-in { column-gap:14px; } }
+@media (max-width:1150px) { .gs-btn { margin-left:auto; } .theme-btn { margin-left:0; } .head-in { column-gap:8px; } .brand { font-size:1.35rem; } }
+/* Web Chat page: live inline chat panel + how-to */
+/* One chat at a time: the floating bubble hides on the Web Chat page, where the inline panel is shown. */
+body[data-route="webchat"] #qontak-webchat-widget { display:none !important; }
+.wc-hero { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,440px); gap:clamp(24px,4vw,48px); align-items:start; }
+.wc-live { position:sticky; top:calc(env(safe-area-inset-top, 0px) + 90px); display:grid; gap:10px; }
+.wc-frame { position:relative; height:min(640px, calc(100vh - 140px)); min-height:520px; border-radius:18px; overflow:hidden; border:1px solid var(--edge); background:#FFFFFF; box-shadow:var(--shadow); }
+.wc-frame iframe { position:absolute; inset:0; width:100%; height:100%; border:0; color-scheme:light; }
+.wc-wait { position:absolute; inset:0; display:grid; place-content:center; gap:12px; padding:24px; text-align:center; background:#FFFFFF; color:#5E6B7D; font-size:.92rem; }
+.wc-wait b { color:#1F2633; font-size:1rem; }
+.wc-wait[hidden] { display:none; }
+.wc-live-cap { display:flex; align-items:center; gap:8px; font-size:.86rem; color:var(--muted); }
+.wc-dot { width:9px; height:9px; border-radius:50%; background:var(--ok); flex:none; box-shadow:0 0 0 4px color-mix(in srgb, var(--ok) 20%, transparent); }
+.wc-acts { display:flex; flex-wrap:wrap; gap:8px; }
+.wc-link { display:flex; align-items:center; gap:8px; flex-wrap:wrap; padding:10px 12px; border-radius:10px; background:var(--tint); font-size:.88rem; }
+.wc-link code { flex:1 1 220px; min-width:0; overflow-wrap:anywhere; font:600 .85rem ui-monospace,Menlo,Consolas,monospace; }
+.wc-sec { margin-top:clamp(28px,4vw,40px); }
+.wc-sec > h2 { font-size:clamp(1.3rem,2.6vw,1.7rem); margin-bottom:6px; }
+.wc-sec > p.muted { margin:0 0 14px; }
+.wc-ways { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr)); gap:14px; }
+.wc-way { background:var(--surface); border:1px solid var(--edge); border-radius:14px; padding:16px; display:grid; gap:8px; align-content:start; }
+.wc-way h3 { font:800 1.02rem var(--display); }
+.wc-way p { margin:0; font-size:.92rem; color:var(--muted); }
+.wc-steps { counter-reset:w; list-style:none; margin:0; padding:0; display:grid; gap:10px; }
+.wc-steps li { counter-increment:w; display:grid; grid-template-columns:34px 1fr; gap:12px; align-items:start; background:var(--surface); border:1px solid var(--edge); border-radius:12px; padding:12px 14px; }
+.wc-steps li::before { content:counter(w); width:30px; height:30px; border-radius:50%; display:grid; place-items:center; background:var(--active-bg); color:var(--active-ink); font:800 .9rem var(--display); }
+.wc-steps b { display:block; }
+.wc-steps span { color:var(--muted); font-size:.92rem; line-height:1.5; }
+.wc-code { position:relative; margin:0; padding:16px; border-radius:12px; background:#0F172A; color:#E2E8F0; font:.84rem/1.6 ui-monospace,Menlo,Consolas,monospace; overflow-x:auto; white-space:pre; }
+.wc-code-head { display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap; margin-bottom:8px; }
+.wc-trouble { display:grid; gap:8px; }
+.wc-trouble details { background:var(--surface); border:1px solid var(--edge); border-radius:12px; }
+.wc-trouble summary { cursor:pointer; padding:13px 16px; font-weight:700; list-style:none; display:flex; justify-content:space-between; gap:12px; }
+.wc-trouble summary::-webkit-details-marker { display:none; }
+.wc-trouble summary::after { content:"+"; font:800 1.2rem/1 var(--display); color:var(--primary); }
+.wc-trouble details[open] summary::after { content:"\2212"; }
+.wc-trouble details > div { padding:0 16px 14px; line-height:1.6; color:var(--muted); }
+.wc-trouble code { font-size:.86em; background:var(--tint); padding:1px 5px; border-radius:5px; color:var(--ink); }
+@media (max-width:980px) { .wc-hero { grid-template-columns:minmax(0,1fr); } .wc-live { position:static; order:-1; } }
 </style>
 </head>
 <body>
@@ -642,6 +681,7 @@ body, .site-head, .card, .box, .fb, .ct, .hc-group, .tpl { transition:background
     </a>
     <nav class="nav" aria-label="Main" id="nav">
       <a href="#/" data-nav="home">Home</a>
+      <a href="#/webchat" data-nav="webchat">Web Chat <span aria-label="aktif">🟢</span></a>
       <a href="#/coex" data-nav="coex">Case WA Coex<span class="new">Baru</span></a>
       <a href="#/tutorial" data-nav="tutorial">Tutorial</a>
       <a href="#/flow" data-nav="flow">WA API Flow</a>
@@ -679,7 +719,8 @@ body, .site-head, .card, .box, .fb, .ct, .hc-group, .tpl { transition:background
         <li><a href="#/coex">Skenario &amp; S&amp;K WA Coex</a></li>
         <li><a href="#/coex/errors">Cari error WA Coex</a></li>
         <li><a href="#/tutorial">Tutorial</a></li>
-        <li><a href="#/flow">WA API Flow</a></li>
+        <li><a href="#/flow">WA API Flow Setting</a></li>
+        <li><a href="#/webchat">Web Chat</a></li>
         <li><a href="#/contact">Contact</a></li>
       </ul>
     </div>
@@ -1185,7 +1226,7 @@ function homeView() {
         </div>
       </div>
       <p class="hero-hint" id="pull-hint" aria-live="polite">halo👋🏼</p>
-      <p class="hero-sub">ini akun Demo Testing untuk keperluan dan memaksimalkan pengalaman implementasinya 🙏🏼</p>
+      <p class="hero-sub">memaksimalkan pengalaman onboarding Anda</p>
     </div>
   </section>
   ${coexBanner()}
@@ -1600,7 +1641,7 @@ mountAutoplay.check = f => {
 };
 
 
-/* ---------- WA API Flow: Flow builder ---------- */
+/* ---------- WA API Flow Setting: Flow builder ---------- */
 /* Meta does not allow its Playground inside an iframe, so this page rebuilds the same editing pattern:
    screens, content blocks, a live phone preview and a Flow JSON export. */
 const FLOW_URL = 'https://developers.facebook.com/documentation/business-messaging/whatsapp/flows/playground';
@@ -1788,7 +1829,7 @@ function fbRender(all) {
 }
 function flowView() {
   return `<section class="section"><div class="wrap">
-    <div class="section-head"><div><h1>WA API Flow</h1>
+    <div class="section-head"><div><h1>WA API Flow Setting</h1>
       <p class="muted" style="margin:8px 0 0">Susun WhatsApp Flow untuk Client langsung di halaman ini: atur layar dan konten, cek pratinjau, lalu salin Flow JSON.</p></div></div>
     <div class="flow-launch">
       <p>Format editor ini mengikuti Flows Playground milik Meta. Untuk validasi akhir, tempel Flow JSON di Playground asli atau di WhatsApp Manager.</p>
@@ -2169,9 +2210,9 @@ const CT_GROUPS = [
 ];
 function contactView() {
   return `<section class="section"><div class="wrap">
-    <div class="section-head"><div><h1>Contact [Demo & Testing]</h1>
+    <div class="section-head"><div><h1>Contact</h1>
       <p class="muted" style="margin:8px 0 0">Mulai percakapan ke akun demo Activation Qontak lewat beberapa channel, lalu lihat pesannya masuk di Omnichannel Qontak.</p></div></div>
-    <div class="ct-intro"><p>🙏🏼 Semua akun di bawah adalah akun demo dan testing untuk keperluan simulasi.</p></div>
+    <div class="ct-intro"><p>Semua akun di bawah adalah akun demo untuk simulasi. Jangan kirim data pribadi atau data Client sungguhan.</p></div>
     <div class="ct-groups">${CT_GROUPS.map(g => `<section aria-label="${esc(g.name)}"><h2>${esc(g.name)}</h2><div class="ct-grid">${g.items.map(c => `
       <article class="ct">
         <div class="ct-top">${ctIcon(c.icon, c.tone)}<div><small>${esc(c.kind)}</small><h3>${esc(c.title)}</h3></div></div>
@@ -2361,7 +2402,8 @@ function gsBuild() {
   add('Halaman', 'Cari error WA Coex', 'Daftar error onboarding WA Coex beserta penyebab dan action item.', '#/coex/errors');
   add('Halaman', 'Panduan Coex (Help Center)', 'Ringkasan interaktif integrasi Meta Coexistence: persyaratan, langkah, fitur, batas broadcast, pembatasan akun.', '#/coex/panduan');
   add('Halaman', 'Tutorial', 'Video tutorial integrasi WA Coex dan Multiple WABA, video YouTube, dan panduan Help Center Multi-channel integration.', '#/tutorial');
-  add('Halaman', 'WA API Flow', 'Susun WhatsApp Flow, pratinjau, salin Flow JSON, contoh Flow per industri.', '#/flow');
+  add('Halaman', 'WA API Flow Setting', 'Susun WhatsApp Flow, pratinjau, salin Flow JSON, contoh Flow per industri.', '#/flow');
+  add('Halaman', 'Web Chat', 'Cara memakai Qontak Web Chat: panel chat langsung, bubble, link chat, form isian, OTP, kode embed, data-code, domain, pasang di website Client.', '#/webchat');
   add('Halaman', 'Contact', 'Mulai percakapan ke akun demo lewat WhatsApp, Instagram, Facebook Messenger, Telegram, LINE, email, Google My Business, mobile app, Shopee, Lazada, Tokopedia, TikTok Shop.', '#/contact');
   if (window.COEX && COEX.cases) {
     COEX.cases.forEach(c => add('Error WA Coex', gsPlain(c.tag + ': ' + c.title), gsPlain([c.err, c.code, c.cause, ...(c.acts || [])].join(' ')), '#/coex/errors', { run:() => COEX.gotoCase(c.id) }));
@@ -2454,8 +2496,107 @@ document.addEventListener('keydown', e => {
   }
 });
 
+/* ---------- Web Chat: explain the Qontak web chat and show it live on the page ----------
+   The hosted chat link (/chat/<name>) refuses to be framed, so the panel is the same widget page that
+   embed.js loads, framed here in its full-page shell and given the same "session" handshake. */
+const WC = { origin:'https://web-chat-app.qontak.com', code:'N334A5MO92LVdSn5zpGS6w', link:'https://web-chat-app.qontak.com/chat/activationqontak' };
+const WC_SNIPPET = '\x3C!-- Start of Qontak Web Chat V2 -->\n\x3Cscript\n  src="https://web-chat-app.qontak.com/embed.js"\n  data-code="' + WC.code + '"\n  async\n>\x3C/script>\n\x3C!-- End of Qontak Web Chat V2 -->';
+let wcTimer = 0, wcReady = false;
+function webchatView() {
+  return `<section class="section"><div class="wrap">
+    <div class="section-head"><div><h1>Web Chat</h1>
+      <p class="muted" style="margin:8px 0 0">Qontak Web Chat menerima chat dari pengunjung website langsung ke Omnichannel Qontak. Coba sekarang di panel chat di halaman ini.</p></div></div>
+    <div class="wc-hero">
+      <div>
+        <div class="wc-sec" style="margin-top:0"><h2>Tiga cara pengunjung memulai chat</h2><p class="muted">Semua masuk ke inbox yang sama di Omnichannel Qontak.</p>
+          <div class="wc-ways">
+            <div class="wc-way"><span class="hc-ic" style="--tone:var(--primary)" aria-hidden="true"><svg viewBox="0 0 24 24">${HC_ICONS.webchat}</svg></span><h3>Panel di halaman</h3><p>Chat langsung dari panel di halaman ini. Form isian dan tombol kirim ada di dalam panel.</p></div>
+            <div class="wc-way"><span class="hc-ic" style="--tone:#14B8A6" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M8.5 12.5c1 1.6 2.2 2.3 3.5 2.3s2.5-.7 3.5-2.3"/></svg></span><h3>Bubble di pojok kanan bawah</h3><p>Tersedia di halaman lain website ini. Di halaman ini disembunyikan agar tidak dobel dengan panel.</p></div>
+            <div class="wc-way"><span class="hc-ic" style="--tone:#F97316" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg></span><h3>Link chat</h3><p>Bagikan link chat ke bio Instagram, email, atau QR code. Terbuka sebagai halaman chat penuh.</p></div>
+          </div></div>
+        <div class="wc-sec"><h2>Cara pengunjung memakai Web Chat</h2>
+          <ol class="wc-steps">
+            <li><div><b>Buka chat</b><span>Lewat panel di halaman, bubble di pojok, atau link chat.</span></div></li>
+            <li><div><b>Isi form</b><span>Pengunjung mengisi data yang diminta, misalnya nama dan nomor WhatsApp. Jika diminta, masukkan kode verifikasi (OTP) yang dikirim.</span></div></li>
+            <li><div><b>Kirim pesan</b><span>Ketik pertanyaan di kolom <i>Ask a question</i>, lampirkan file lewat ikon klip jika perlu, lalu tekan <i>Send</i>.</span></div></li>
+            <li><div><b>Agent membalas dari Qontak</b><span>Pesan masuk ke Omnichannel Qontak dan dibalas agent atau chatbot. Balasan muncul di panel yang sama.</span></div></li>
+            <li><div><b>Lanjutkan kapan saja</b><span>Riwayat chat tetap ada di browser yang sama, jadi pengunjung bisa kembali ke percakapan sebelumnya.</span></div></li>
+          </ol></div>
+      </div>
+      <aside class="wc-live" aria-label="Coba Web Chat">
+        <div class="wc-live-cap"><span class="wc-dot" aria-hidden="true"></span>Panel chat langsung · Activation Team</div>
+        <div class="wc-frame" id="wc-frame">
+          <div class="wc-wait" id="wc-wait"><b>Memuat panel chat…</b><span id="wc-wait-msg">Tunggu sebentar.</span></div>
+        </div>
+        <div class="wc-acts">
+          <a class="btn small" href="${WC.link}" target="_blank" rel="noopener">Buka chat di tab baru ↗</a>
+          <button type="button" class="btn ghost small" data-wc-copy="link">Salin link chat</button>
+          <button type="button" class="btn ghost small" data-wc-reload>Muat ulang panel</button>
+        </div>
+      </aside>
+    </div>
+    <div class="wc-sec"><h2>Pasang Web Chat di website Client</h2><p class="muted">Ringkasnya: buat Web Chat di Qontak, daftarkan domain website, lalu tempel kode berikut sebelum tag <code>&lt;/body&gt;</code>.</p>
+      <ol class="wc-steps">
+        <li><div><b>Buat Web Chat di Qontak</b><span>Omnichannel Qontak › Integrations › Web Chat, lalu atur nama, warna, dan form isian.</span></div></li>
+        <li><div><b>Daftarkan domain website</b><span>Web Chat hanya tampil di domain yang terdaftar. Domain lain akan ditolak.</span></div></li>
+        <li><div><b>Tempel kode embed</b><span>Salin kode dari Qontak (contoh di bawah adalah kode website ini), tempel di semua halaman yang perlu chat.</span></div></li>
+      </ol>
+      <div style="margin-top:14px"><div class="wc-code-head"><b>Kode embed website ini</b><button type="button" class="btn ghost small" data-wc-copy="code">Salin kode</button></div>
+        <pre class="wc-code" id="wc-code"></pre></div>
+      <div class="wc-link" style="margin-top:12px"><span>Link chat:</span><code>${WC.link}</code><button type="button" class="btn ghost small" data-wc-copy="link">Salin</button></div>
+      <p style="margin-top:14px"><a class="btn ghost small" href="#/help/5642474620825">Panduan lengkap: membuat & kustomisasi Qontak Web Chat</a> <a class="btn ghost small" href="#/help/5658044409241">Kustomisasi header Web Chat</a></p>
+    </div>
+    <div class="wc-sec"><h2>Kalau Web Chat tidak muncul</h2>
+      <div class="wc-trouble">
+        <details><summary>Panel atau bubble tidak tampil sama sekali</summary><div>Pastikan kode embed sudah terpasang dan <code>data-code</code>-nya benar. Cek juga apakah ada ekstensi browser (ad blocker) yang memblokir <code>web-chat-app.qontak.com</code>.</div></details>
+        <details><summary>Muncul pesan domain tidak cocok</summary><div>Domain website belum terdaftar di pengaturan Web Chat. Tambahkan domain persis seperti di address bar, termasuk subdomain jika ada.</div></details>
+        <details><summary>Integrasi tidak aktif</summary><div>Web Chat sedang dinonaktifkan di Qontak. Aktifkan kembali di Integrations › Web Chat.</div></details>
+        <details><summary>Link chat tidak bisa ditampilkan di dalam website lain</summary><div>Ini disengaja oleh Qontak demi keamanan. Untuk tampil di website, pakai kode embed; untuk dibagikan, pakai link chat.</div></details>
+      </div></div>
+  </div></section>`;
+}
+function wcMount() {
+  const box = $('#wc-frame'); if (!box) return;
+  $('#wc-code').textContent = WC_SNIPPET;
+  const old = $('#wc-frame iframe'); if (old) old.remove();
+  wcReady = false; $('#wc-wait').hidden = false; $('#wc-wait-msg').textContent = 'Tunggu sebentar.';
+  const host = location.origin && location.origin !== 'null' ? location.origin : '';
+  const q = new URLSearchParams({ d:host, c:WC.code, shell:'full' });
+  const f = document.createElement('iframe');
+  f.title = 'Qontak Web Chat';
+  f.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-downloads allow-popups allow-popups-to-escape-sandbox allow-forms');
+  f.src = WC.origin + '/?' + q.toString();
+  f.addEventListener('load', () => { wcReady = true; if ($('#wc-wait')) $('#wc-wait').hidden = true; });
+  box.appendChild(f);
+  clearTimeout(wcTimer);
+  wcTimer = setTimeout(() => {
+    if (wcReady || !$('#wc-wait')) return;
+    $('#wc-wait').hidden = false;
+    $('#wc-wait-msg').innerHTML = 'Panel chat belum termuat di sini. Pakai tombol <b>Buka chat di tab baru</b> atau bubble di pojok kanan bawah.';
+  }, 9000);
+}
+window.addEventListener('message', e => {
+  const f = $('#wc-frame iframe');
+  if (!f || e.source !== f.contentWindow || e.origin !== WC.origin) return;
+  const d = e.data; if (!d || typeof d !== 'object' || typeof d.eventName !== 'string') return;
+  if (d.eventName === 'ready') {
+    wcReady = true; $('#wc-wait').hidden = true;
+    f.contentWindow.postMessage({ eventName:'session', data:{ token:'' } }, WC.origin);
+  }
+});
+document.addEventListener('click', e => {
+  const c = e.target.closest('[data-wc-copy]');
+  if (c) {
+    const v = c.dataset.wcCopy === 'code' ? WC_SNIPPET : WC.link, label = c.dataset.wcCopy === 'code' ? 'Kode embed disalin' : 'Link chat disalin';
+    const fallback = () => { const el = c.dataset.wcCopy === 'code' ? $('#wc-code') : c.parentElement.querySelector('code'); if (!el) return; const r = document.createRange(); r.selectNodeContents(el); const sel = getSelection(); sel.removeAllRanges(); sel.addRange(r); toast('Sudah diblok. Tekan Ctrl+C untuk menyalin.'); };
+    if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(v).then(() => toast(label)).catch(fallback); else fallback();
+    return;
+  }
+  if (e.target.closest('[data-wc-reload]')) wcMount();
+});
+
 /* ---------- Router ---------- */
-const TITLES = { shop:'Shop', how:'How to order', cart:'Your cart', checkout:'Checkout', order:'Your order', support:'Support', coex:'Case WA Coex', tutorial:'Tutorial', flow:'WA API Flow', contact:'Contact' };
+const TITLES = { shop:'Shop', how:'How to order', cart:'Your cart', checkout:'Checkout', order:'Your order', support:'Support', coex:'Case WA Coex', tutorial:'Tutorial', flow:'WA API Flow Setting', contact:'Contact', webchat:'Web Chat' };
 function render(fresh) {
   const parts = location.hash.replace(/^#\/?/, '').split('/').filter(Boolean).map(decodeURIComponent);
   const [a, b] = parts;
@@ -2469,6 +2610,7 @@ function render(fresh) {
     case 'order': html = orderView(b || ''); title = TITLES.order + ' | Activation Qontak'; break;
     case 'support': html = supportView(); title = TITLES.support + ' | Activation Qontak'; break;
     case 'coex': html = window.COEX ? COEX.view(b) : notFoundView(); title = TITLES.coex + ' | Activation Qontak'; break;
+    case 'webchat': html = webchatView(); title = TITLES.webchat + ' | Activation Qontak'; break;
     case 'contact': html = contactView(); title = TITLES.contact + ' | Activation Qontak'; break;
     case 'help': html = hcArticleView(b || ''); title = (hcTitle(b) || 'Help Center') + ' | Activation Qontak'; break;
     case 'flow': html = flowView(); title = TITLES.flow + ' | Activation Qontak'; break;
@@ -2487,6 +2629,8 @@ function render(fresh) {
   if (!a || a === 'tutorial') mountAutoplay();
   if (a === 'flow') mountFlow();
   if (a === 'help') mountHelp();
+  if (a === 'webchat') wcMount();
+  document.body.dataset.route = a || 'home';
   if (gsAfter) { const f = gsAfter; gsAfter = null; setTimeout(f, 80); }
   if (a === 'tutorial' && sessionHcJump) { sessionHcJump = false; const h = $('#help-center'); if (h) setTimeout(() => h.scrollIntoView({ block:'start' }), 0); }
   if (fresh) { window.scrollTo(0, 0); main.focus({ preventScroll: true }); }
