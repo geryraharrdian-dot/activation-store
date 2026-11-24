@@ -2789,7 +2789,7 @@ function imMount() {
   pKeys.forEach((k, i) => { pY[k] = TOP + pGap * i + pGap / 2; });
   mKeys.forEach((k, i) => { mY[k] = TOP + mGap * i + mGap / 2; });
   el('text', { x:LX, y:30, class:'im-colh' }, svg, 'Sistem di luar Qontak');
-  el('text', { x:CX0 - 6, y:30, class:'im-colh' }, svg, 'Titik integrasi');
+  el('text', { x:CX0 - 6, y:30, class:'im-colh' }, svg, 'Poin Integrasi');
   el('text', { x:RX, y:30, class:'im-colh' }, svg, 'Modul Qontak');
   el('line', { x1:LX, x2:W - 20, y1:42, y2:42, style:'stroke:var(--line)', 'stroke-width':1 }, svg);
   const gEdges = el('g', {}, svg), edges = [], terms = [], leftNodes = {}, rightNodes = {};
