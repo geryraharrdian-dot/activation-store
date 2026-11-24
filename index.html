@@ -90,7 +90,7 @@ main:focus { outline:none; }
 .nav a { text-decoration:none; font-weight:700; padding:10px 14px; border-radius:999px; white-space:nowrap; }
 .nav a:hover { background:color-mix(in srgb, var(--primary) 8%, transparent); }
 .nav a[aria-current="page"] { background:var(--active-bg); color:var(--active-ink); }
-@media (max-width:1150px) { .nav { order:3; width:100%; margin-left:0; } }
+@media (max-width:1260px) { .nav { order:3; width:100%; margin-left:0; } }
 
 /* buttons */
 .btn { display:inline-flex; align-items:center; justify-content:center; gap:8px; min-height:48px; padding:0 24px; border-radius:999px; border:2px solid var(--btn-bg); background:var(--btn-bg); color:var(--btn-ink); font:700 1rem var(--body); text-decoration:none; cursor:pointer; }
@@ -414,7 +414,7 @@ details.faq div { padding-bottom:16px; }
 .flow-sub { margin-top:clamp(40px,6vw,64px); }
 .flow-sub h2 { font-size:clamp(1.5rem,3vw,2rem); margin-bottom:20px; }
 @media (max-width:900px) { .fb { grid-template-columns:minmax(0,1fr); } .fb-ed { border-right:0; border-bottom:1px solid var(--edge); } }
-@media (max-width:1150px) { .nav { flex-wrap:wrap; overflow:visible; } .nav a { padding:8px 12px; } }
+@media (max-width:1260px) { .nav { flex-wrap:wrap; overflow:visible; } .nav a { padding:8px 12px; } }
 /* Help Center links: Multi-channel integration */
 .hc { margin-top:clamp(40px,6vw,64px); }
 .hc-head { display:flex; justify-content:space-between; align-items:end; gap:12px 24px; flex-wrap:wrap; margin-bottom:20px; }
@@ -519,6 +519,8 @@ mark, .hc-mark { background:color-mix(in srgb, var(--warning) 38%, transparent);
 .ct-note { font-size:.86rem; color:var(--muted); margin:0; }
 .ct-intro { background:var(--tint); border-radius:14px; padding:14px 18px; margin-bottom:28px; font-size:.95rem; }
 .ct-intro p { margin:0; max-width:none; }
+/* Header uses a wider track than the page so seven menu items fit on one row */
+.site-head .wrap { max-width:1300px; }
 /* Light/dark toggle */
 .theme-btn { flex:none; width:44px; height:44px; border-radius:50%; border:1px solid var(--field-edge); background:var(--surface); color:var(--ink); display:grid; place-items:center; cursor:pointer; }
 .theme-btn:hover { background:var(--tint); color:var(--primary); }
@@ -528,7 +530,7 @@ mark, .hc-mark { background:color-mix(in srgb, var(--warning) 38%, transparent);
 :root[data-theme="dark"] .theme-btn .moon { display:block; }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .theme-btn .sun { display:none; } :root:not([data-theme="light"]) .theme-btn .moon { display:block; } }
 body, .site-head, .card, .box, .fb, .ct, .hc-group, .tpl { transition:background-color .2s, color .2s, border-color .2s; }
-@media (max-width:1150px) { .theme-btn { margin-left:auto; } }
+@media (max-width:1260px) { .theme-btn { margin-left:auto; } }
 /* Coex tips before onboarding */
 .cx-tips { margin-top:32px; }
 .cx-tips h2 { display:flex; align-items:center; gap:8px; }
@@ -621,11 +623,11 @@ body, .site-head, .card, .box, .fb, .ct, .hc-group, .tpl { transition:background
 .gs-hint kbd { font:700 .72rem var(--body); padding:1px 5px; border-radius:5px; border:1px solid var(--edge); background:var(--bg); }
 .gs-flash { animation:cxflash 1.6s ease; border-radius:12px; }
 .gs-btn { padding:0; width:44px; justify-content:center; } .gs-btn .gs-lbl { display:none; }
-@media (min-width:1151px) { .nav a { padding:10px 11px; } .head-in { column-gap:14px; } }
-@media (max-width:1150px) { .gs-btn { margin-left:auto; } .theme-btn { margin-left:0; } .head-in { column-gap:8px; } .brand { font-size:1.35rem; } }
+@media (min-width:1261px) { .nav a { padding:10px 11px; } .head-in { column-gap:14px; } }
+@media (max-width:1260px) { .gs-btn { margin-left:auto; } .theme-btn { margin-left:0; } .head-in { column-gap:8px; } .brand { font-size:1.35rem; } }
 /* Web Chat page: live inline chat panel + how-to */
 /* One chat at a time: the floating bubble hides on the Web Chat page, where the inline panel is shown. */
-body[data-route="webchat"] #qontak-webchat-widget { display:none !important; }
+body[data-route="webchat"] #qontak-webchat-widget, body[data-route="proposal"] #qontak-webchat-widget { display:none !important; }
 .wc-hero { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,440px); gap:clamp(24px,4vw,48px); align-items:start; }
 .wc-live { position:sticky; top:calc(env(safe-area-inset-top, 0px) + 90px); display:grid; gap:10px; }
 .wc-frame { position:relative; height:min(640px, calc(100vh - 140px)); min-height:520px; border-radius:18px; overflow:hidden; border:1px solid var(--edge); background:#FFFFFF; box-shadow:var(--shadow); }
@@ -661,6 +663,64 @@ body[data-route="webchat"] #qontak-webchat-widget { display:none !important; }
 .wc-trouble details > div { padding:0 16px 14px; line-height:1.6; color:var(--muted); }
 .wc-trouble code { font-size:.86em; background:var(--tint); padding:1px 5px; border-radius:5px; color:var(--ink); }
 @media (max-width:980px) { .wc-hero { grid-template-columns:minmax(0,1fr); } .wc-live { position:static; order:-1; } }
+/* Private proposal: shown only when the share link carries the decryption key */
+.pp-bar { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:10px 16px; margin-bottom:14px; }
+.pp-bar h1 { font-size:clamp(1.6rem,3.4vw,2.2rem); }
+.pp-bar p { margin:4px 0 0; font-size:.9rem; }
+.pp-lock { display:inline-flex; align-items:center; gap:6px; font-size:.78rem; font-weight:700; padding:3px 10px; border-radius:99px; background:var(--active-bg); color:var(--active-ink); }
+.pp-frame { position:relative; width:100%; height:min(calc(100vh - 210px), 860px); min-height:420px; border-radius:16px; overflow:hidden; background:#06067a; box-shadow:var(--shadow); }
+.pp-frame iframe { position:absolute; inset:0; width:100%; height:100%; border:0; }
+.pp-wait { display:grid; place-content:center; gap:8px; min-height:50vh; text-align:center; color:var(--muted); }
+@media (max-width:620px) { .pp-frame { height:540px; min-height:0; } }
+/* Map Integration: wiring diagram (systems outside Qontak -> integrations -> Qontak modules) */
+:root { --im-meta:#1f8a4c; --im-google:#2f63c4; --im-mekari:#c23a2b; --im-client:#7a5a12; --im-desty:#7d3fa0; --im-chan:#0f7f86; --im-b3:#b5560f; --im-hi:#ffd54a; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --im-meta:#4fc47f; --im-google:#7aa3ef; --im-mekari:#ef7a6c; --im-client:#d6ad55; --im-desty:#c08be0; --im-chan:#4fc3c9; --im-b3:#f0a060; --im-hi:#8a6d00; } }
+:root[data-theme="dark"] { --im-meta:#4fc47f; --im-google:#7aa3ef; --im-mekari:#ef7a6c; --im-client:#d6ad55; --im-desty:#c08be0; --im-chan:#4fc3c9; --im-b3:#f0a060; --im-hi:#8a6d00; }
+.im-card { background:var(--surface); border:1px solid var(--edge); border-radius:16px; box-shadow:var(--shadow); overflow:hidden; }
+.im-bar { display:flex; flex-wrap:wrap; gap:8px 18px; align-items:center; padding:12px 20px; border-bottom:1px solid var(--line); font-size:.85rem; }
+.im-lbl { font-size:.72rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); }
+.im-cable { display:inline-flex; align-items:center; gap:7px; }
+.im-cable i { display:inline-block; width:26px; height:5px; border-radius:3px; background:currentColor; }
+.im-cable span { color:var(--ink); }
+.im-cable.dash { color:var(--muted); }
+.im-cable.dash i { background:none; border-top:2.5px dashed currentColor; height:0; border-radius:0; }
+.im-filters { display:flex; flex-wrap:wrap; gap:6px; }
+.im-filters .chip { min-height:34px; font-size:.85rem; padding:0 14px; }
+.im-diagram { overflow-x:auto; padding:8px 12px 10px; }
+.im-diagram svg { display:block; width:100%; min-width:900px; height:auto; }
+.im-colh { font:700 11px var(--body); letter-spacing:.1em; text-transform:uppercase; fill:var(--muted); }
+.im-node rect.box { fill:var(--surface); stroke:var(--field-edge); stroke-width:1; }
+.im-node text { font:600 13px var(--body); fill:var(--ink); }
+.im-node .sub { font:400 10.5px var(--body); fill:var(--muted); }
+.im-mod rect.box { stroke:var(--primary); stroke-width:1.5; }
+.im-mod .big { font:800 18px var(--display); fill:var(--ink); }
+.im-term text.num { font:700 11px var(--body); fill:var(--muted); }
+.im-term text.nm { font:600 13.5px var(--body); fill:var(--ink); }
+.im-term text.sc { font:400 10.5px var(--body); fill:var(--muted); }
+.im-term rect.row { fill:transparent; rx:8; }
+.im-term:hover rect.row, .im-term.on rect.row { fill:var(--im-hi); fill-opacity:.35; }
+.im-term:focus { outline:none; }
+.im-term:focus-visible rect.row { stroke:var(--focus); stroke-width:2; }
+.im-jack { fill:var(--surface); stroke:var(--ink); stroke-width:1.5; }
+.im-jack-in { fill:var(--ink); }
+.im-edge { fill:none; stroke-width:3; stroke-linecap:round; opacity:.8; transition:opacity .15s; }
+.im-edge.inf { stroke-dasharray:6 5; stroke-width:2.2; }
+svg.dim .im-edge { opacity:.08; }
+svg.dim .im-edge.on { opacity:1; stroke-width:4; }
+svg.dim .im-term:not(.on), svg.dim .im-node:not(.on) { opacity:.32; }
+.im-hint { margin:0; padding:12px 20px 16px; font-size:.85rem; color:var(--muted); border-top:1px solid var(--line); max-width:none; }
+.im-list { margin-top:clamp(28px,4vw,40px); }
+.im-list h2 { font-size:clamp(1.3rem,2.6vw,1.7rem); margin-bottom:12px; }
+.im-rows { display:grid; gap:8px; }
+.im-row { display:grid; grid-template-columns:36px minmax(0,1.2fr) minmax(0,1fr) minmax(0,1fr); gap:6px 16px; align-items:start; padding:12px 16px; background:var(--surface); border:1px solid var(--edge); border-radius:12px; }
+.im-row .n { font-weight:700; color:var(--muted); font-variant-numeric:tabular-nums; }
+.im-row b { display:block; line-height:1.35; }
+.im-row small { color:var(--muted); }
+.im-pills { display:flex; flex-wrap:wrap; gap:5px; }
+.im-pill { font-size:.76rem; font-weight:700; padding:2px 9px; border-radius:99px; border:1px solid currentColor; white-space:nowrap; }
+.im-pill.inf { border-style:dashed; opacity:.85; }
+.im-rowhead { padding:0 16px; font-size:.72rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); background:none; border:0; }
+@media (max-width:760px) { .im-row { grid-template-columns:28px minmax(0,1fr); } .im-row > :nth-child(n+3) { grid-column:2; } .im-rowhead { display:none; } }
 </style>
 </head>
 <body>
@@ -685,6 +745,7 @@ body[data-route="webchat"] #qontak-webchat-widget { display:none !important; }
       <a href="#/coex" data-nav="coex">Case WA Coex<span class="new">Baru</span></a>
       <a href="#/tutorial" data-nav="tutorial">Tutorial</a>
       <a href="#/flow" data-nav="flow">WA API Flow</a>
+      <a href="#/map" data-nav="map">Map Integration</a>
       <a href="#/contact" data-nav="contact">Contact</a>
     </nav>
     <button type="button" class="gs-btn" id="gs-btn" aria-label="Cari di seluruh website" title="Cari (Ctrl+K atau /)" aria-haspopup="dialog">
@@ -721,6 +782,7 @@ body[data-route="webchat"] #qontak-webchat-widget { display:none !important; }
         <li><a href="#/tutorial">Tutorial</a></li>
         <li><a href="#/flow">WA API Flow Setting</a></li>
         <li><a href="#/webchat">Web Chat</a></li>
+        <li><a href="#/map">Map Integration</a></li>
         <li><a href="#/contact">Contact</a></li>
       </ul>
     </div>
@@ -2404,6 +2466,7 @@ function gsBuild() {
   add('Halaman', 'Tutorial', 'Video tutorial integrasi WA Coex dan Multiple WABA, video YouTube, dan panduan Help Center Multi-channel integration.', '#/tutorial');
   add('Halaman', 'WA API Flow Setting', 'Susun WhatsApp Flow, pratinjau, salin Flow JSON, contoh Flow per industri.', '#/flow');
   add('Halaman', 'Web Chat', 'Cara memakai Qontak Web Chat: panel chat langsung, bubble, link chat, form isian, OTP, kode embed, data-code, domain, pasang di website Client.', '#/webchat');
+  add('Halaman', 'Map Integration', 'Peta integrasi: Channel Integration, WA API Migrate, WA Call, FBBM WA Flow, FBBM WA Catalog, Broadcast API, Knowledge Base, Bot AI, Bot API, Workflow, Appointment, WhatsApp auto-message, Data Management, Call Center, Commerce. Officeless, Insight, Jurnal, Google Sheet, Google Calendar, B3, Desty Store, webhook.', '#/map');
   add('Halaman', 'Contact', 'Mulai percakapan ke akun demo lewat WhatsApp, Instagram, Facebook Messenger, Telegram, LINE, email, Google My Business, mobile app, Shopee, Lazada, Tokopedia, TikTok Shop.', '#/contact');
   if (window.COEX && COEX.cases) {
     COEX.cases.forEach(c => add('Error WA Coex', gsPlain(c.tag + ': ' + c.title), gsPlain([c.err, c.code, c.cause, ...(c.acts || [])].join(' ')), '#/coex/errors', { run:() => COEX.gotoCase(c.id) }));
@@ -2595,8 +2658,160 @@ document.addEventListener('click', e => {
   if (e.target.closest('[data-wc-reload]')) wcMount();
 });
 
+/* ---------- Private proposal (share link only) ----------
+   proposal.enc holds the deck gzipped and encrypted with AES-256-GCM. The key exists only in the share link,
+   after the # (#/proposal/<key>), which browsers never send to the server. Without the right key this route
+   shows the normal "page not found", and the proposal is not in the menu, footer or site search. */
+const PP_FILE = 'proposal.enc';
+const ppB64u = s => Uint8Array.from(atob(s.replace(/-/g, '+').replace(/_/g, '/') + '==='.slice((s.length + 3) % 4)), c => c.charCodeAt(0));
+function proposalShell() { return `<section class="section"><div class="wrap"><div class="pp-wait" id="pp-root"><b>Membuka dokumen…</b></div></div></section>`; }
+async function ppDecrypt(key) {
+  if (!/^[A-Za-z0-9_-]{43}$/.test(key || '') || !(window.crypto && crypto.subtle) || typeof DecompressionStream === 'undefined') throw new Error('unavailable');
+  const k = await crypto.subtle.importKey('raw', ppB64u(key), 'AES-GCM', false, ['decrypt']);
+  const res = await fetch(PP_FILE, { cache:'no-store' }); if (!res.ok) throw new Error('missing');
+  const buf = await res.arrayBuffer();
+  const plain = await crypto.subtle.decrypt({ name:'AES-GCM', iv:new Uint8Array(buf, 0, 12) }, k, new Uint8Array(buf, 12));
+  return await new Response(new Blob([plain]).stream().pipeThrough(new DecompressionStream('gzip'))).text();
+}
+async function mountProposal(key) {
+  const fail = () => { const r = $('#pp-root'); if (!r) return; $('#main').innerHTML = notFoundView(); document.title = 'Activation Qontak'; };
+  let html;
+  try { html = await ppDecrypt(key); } catch (e) { fail(); return; }
+  const root = $('#pp-root'); if (!root) return;
+  document.title = 'Proposal Activation Playdate | Activation Qontak';
+  root.outerHTML = `<div class="pp-bar"><div><span class="pp-lock">🔒 Akses terbatas · hanya lewat link</span><h1>Proposal Activation Playdate</h1>
+      <p class="muted">Jangan teruskan link ini ke pihak di luar tim. Siapa pun yang memegang link bisa membuka dokumen ini.</p></div>
+      <div class="hero-cta" style="gap:8px"><button type="button" class="btn small" id="pp-fs">Layar penuh</button></div></div>
+    <div class="pp-frame" id="pp-frame"></div>`;
+  const f = document.createElement('iframe');
+  f.title = 'Proposal Activation Playdate';
+  f.setAttribute('sandbox', 'allow-scripts allow-popups');
+  f.setAttribute('allow', 'fullscreen'); f.allowFullscreen = true;
+  f.setAttribute('referrerpolicy', 'no-referrer');
+  f.srcdoc = html;
+  $('#pp-frame').appendChild(f);
+}
+document.addEventListener('click', e => {
+  if (!e.target.closest('#pp-fs')) return;
+  const fr = $('#pp-frame'); if (fr && fr.requestFullscreen) fr.requestFullscreen().catch(() => {});
+});
+
+/* ---------- Map Integration: wiring diagram ----------
+   Source: "Map Integration - Activation" artifact. m/p = stated modules/systems, mi/pi = inferred (dashed, verify per project). */
+const IM_PARTY = {
+  meta:{ label:'Meta · WhatsApp Business', sub:'WABA, FBBM', c:'--im-meta' },
+  chan:{ label:'Marketplace & social', sub:'Shopee, IG, Telegram, dll.', c:'--im-chan' },
+  client:{ label:'Sistem Client', sub:'API / webhook', c:'--im-client' },
+  gsheet:{ label:'Google Sheet', sub:'Google', c:'--im-google' },
+  gcal:{ label:'Google Calendar', sub:'Google', c:'--im-google' },
+  officeless:{ label:'Officeless', sub:'Mekari', c:'--im-mekari' },
+  insight:{ label:'Insight', sub:'Mekari', c:'--im-mekari' },
+  jurnal:{ label:'Jurnal', sub:'Mekari', c:'--im-mekari' },
+  b3:{ label:'B3', sub:'Call center', c:'--im-b3' },
+  desty:{ label:'Desty Store', sub:'Commerce', c:'--im-desty' }
+};
+const IM_MOD = { omni:{ label:'Omnichannel', short:'Omni' }, bot:{ label:'Chatbot', short:'Bot' }, crm:{ label:'CRM', short:'CRM' }, kb:{ label:'Knowledge Base', short:'KB' }, appt:{ label:'Appointment', short:'Appt' } };
+const IM_ITEMS = [
+  { n:'Channel Integration', sc:'(All)', m:['omni'], mi:['bot','crm'], p:['meta','chan'] },
+  { n:'WA API Migrate', sc:'(Omni)', m:['omni'], p:['meta'] },
+  { n:'WA Call', sc:'(Omni)', m:['omni'], p:['meta'] },
+  { n:'FBBM WA Flow', sc:'(Bot, CRM, Sheet)', m:['bot','crm'], p:['meta','gsheet'] },
+  { n:'FBBM WA Catalog', sc:'(Omni)', m:['omni'], p:['meta'] },
+  { n:'Broadcast API', sc:'external', mi:['omni'], pi:['meta','client'] },
+  { n:'Knowledge Base', sc:'(KB, Bot)', m:['kb','bot'], p:['client'] },
+  { n:'Bot AI', sc:'(Bot)', m:['bot'], p:['client'] },
+  { n:'Bot API', sc:'(Webhook)', m:['bot'], p:['client'] },
+  { n:'Workflow', sc:'(Officeless, Insight, Jurnal)', m:['omni','bot','crm'], p:['officeless','insight','jurnal'] },
+  { n:'Appointment', sc:'(Google Calendar)', m:['bot','appt'], p:['gcal'] },
+  { n:'WhatsApp auto-message', sc:'(Omni, CRM)', m:['omni','crm'], p:['meta','officeless'] },
+  { n:'Data Management', sc:'Deals, Task, dll. (Google Sheet)', m:['crm'], p:['gsheet'] },
+  { n:'Call Center', sc:'(CRM)', m:['crm'], p:['b3'] },
+  { n:'Commerce', sc:'(Desty Store)', m:['omni'], p:['desty'] }
+].map(x => ({ m:[], mi:[], p:[], pi:[], ...x }));
+function imView() {
+  const pill = (k, lbl, color, inf) => `<span class="im-pill${inf ? ' inf' : ''}" style="color:${color}" title="${inf ? 'Perlu dicek per project' : ''}">${esc(lbl)}${inf ? ' ?' : ''}</span>`;
+  return `<section class="section"><div class="wrap">
+    <div class="section-head"><div><h1>Map Integration</h1>
+      <p class="muted" style="margin:8px 0 0">Peta ${IM_ITEMS.length} integrasi yang biasa di-setup tim Activation: sistem di luar Qontak di kiri, titik integrasi di tengah, modul Qontak di kanan.</p></div></div>
+    <div class="im-card">
+      <div class="im-bar"><span class="im-lbl">Warna kabel = pihak</span>
+        ${[['--im-meta','Meta'],['--im-chan','Channel lain'],['--im-google','Google'],['--im-mekari','Ekosistem Mekari'],['--im-client','Sistem Client'],['--im-b3','B3'],['--im-desty','Desty']].map(([c, l]) => `<span class="im-cable" style="color:var(${c})"><i></i><span>${l}</span></span>`).join('')}
+        <span class="im-cable dash"><i></i><span>Perkiraan, perlu dicek</span></span></div>
+      <div class="im-bar"><span class="im-lbl">Filter modul</span><div class="im-filters" id="im-filters"></div></div>
+      <div class="im-diagram" role="region" aria-label="Diagram integrasi, geser ke samping di layar kecil" tabindex="0"><svg id="im-map" viewBox="0 0 1000 700" aria-hidden="true"></svg></div>
+      <p class="im-hint">Arahkan kursor ke integrasi untuk melihat kabelnya. Klik modul atau sistem untuk memfilter. Kabel putus-putus tidak disebut di daftar sumber (Channel Integration ke Chatbot dan CRM, serta semua kabel Broadcast API), jadi konfirmasi per project.</p>
+    </div>
+    <div class="im-list"><h2>Daftar integrasi</h2>
+      <div class="im-rows">
+        <div class="im-row im-rowhead"><span>#</span><span>Integrasi</span><span>Sistem luar</span><span>Modul Qontak</span></div>
+        ${IM_ITEMS.map((x, i) => `<div class="im-row"><span class="n">${String(i + 1).padStart(2, '0')}</span><div><b>${esc(x.n)}</b><small>${esc(x.sc)}</small></div>
+          <div class="im-pills">${x.p.map(k => pill(k, IM_PARTY[k].label, `var(${IM_PARTY[k].c})`, false)).join('')}${x.pi.map(k => pill(k, IM_PARTY[k].label, `var(${IM_PARTY[k].c})`, true)).join('')}</div>
+          <div class="im-pills">${x.m.map(k => pill(k, IM_MOD[k].label, 'var(--primary)', false)).join('')}${x.mi.map(k => pill(k, IM_MOD[k].label, 'var(--primary)', true)).join('')}</div></div>`).join('')}
+      </div>
+      <p class="muted small" style="margin-top:10px">Label dengan tanda <b>?</b> dan garis putus-putus = perkiraan, perlu dicek per project.</p>
+    </div>
+  </div></section>`;
+}
+function imMount() {
+  const svg = $('#im-map'); if (!svg) return;
+  const NS = 'http://www.w3.org/2000/svg';
+  const el = (tag, attrs, parent, text) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); if (text != null) e.textContent = text; if (parent) parent.appendChild(e); return e; };
+  const I = IM_ITEMS, TOP = 58, RH = 41, W = 1000, H = TOP + I.length * RH + 20;
+  svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
+  const LX = 20, LW = 210, CX0 = 370, CX1 = 640, RX = 790, RW = 190;
+  const pKeys = Object.keys(IM_PARTY), mKeys = Object.keys(IM_MOD), pY = {}, mY = {};
+  const pGap = (I.length * RH) / pKeys.length, mGap = (I.length * RH) / mKeys.length;
+  pKeys.forEach((k, i) => { pY[k] = TOP + pGap * i + pGap / 2; });
+  mKeys.forEach((k, i) => { mY[k] = TOP + mGap * i + mGap / 2; });
+  el('text', { x:LX, y:30, class:'im-colh' }, svg, 'Sistem di luar Qontak');
+  el('text', { x:CX0 - 6, y:30, class:'im-colh' }, svg, 'Titik integrasi');
+  el('text', { x:RX, y:30, class:'im-colh' }, svg, 'Modul Qontak');
+  el('line', { x1:LX, x2:W - 20, y1:42, y2:42, style:'stroke:var(--line)', 'stroke-width':1 }, svg);
+  const gEdges = el('g', {}, svg), edges = [], terms = [], leftNodes = {}, rightNodes = {};
+  const curve = (x1, y1, x2, y2) => { const dx = (x2 - x1) * .5; return `M${x1},${y1} C${x1 + dx},${y1} ${x2 - dx},${y2} ${x2},${y2}`; };
+  pKeys.forEach(k => {
+    const p = IM_PARTY[k], y = pY[k], g = el('g', { class:'im-node', style:'cursor:pointer' }, svg);
+    el('rect', { x:LX, y:y - 19, width:LW, height:38, rx:6, class:'box' }, g);
+    el('rect', { x:LX, y:y - 19, width:5, height:38, style:`fill:var(${p.c});stroke:none` }, g);
+    el('text', { x:LX + 14, y:y - 2 }, g, p.label); el('text', { x:LX + 14, y:y + 12, class:'sub' }, g, p.sub);
+    el('circle', { cx:LX + LW, cy:y, r:5, class:'im-jack' }, g);
+    leftNodes[k] = g;
+  });
+  mKeys.forEach(k => {
+    const y = mY[k], g = el('g', { class:'im-node im-mod', style:'cursor:pointer' }, svg);
+    el('rect', { x:RX, y:y - 30, width:RW, height:60, rx:8, class:'box' }, g);
+    el('text', { x:RX + 16, y:y + 2, class:'big' }, g, IM_MOD[k].label); el('text', { x:RX + 16, y:y + 18, class:'sub' }, g, 'modul · ' + IM_MOD[k].short);
+    el('circle', { cx:RX, cy:y, r:6, class:'im-jack' }, g);
+    rightNodes[k] = g;
+  });
+  I.forEach((x, i) => {
+    const y = TOP + i * RH + RH / 2, g = el('g', { class:'im-term', tabindex:0, style:'cursor:pointer' }, svg);
+    el('rect', { x:CX0 - 14, y:y - RH / 2 + 2, width:CX1 - CX0 + 28, height:RH - 4, class:'row' }, g);
+    [CX0, CX1].forEach(cx => { el('circle', { cx, cy:y, r:6, class:'im-jack' }, g); el('circle', { cx, cy:y, r:2, class:'im-jack-in' }, g); });
+    el('text', { x:CX0 + 14, y:y - 2, class:'num' }, g, String(i + 1).padStart(2, '0'));
+    el('text', { x:CX0 + 40, y:y - 2, class:'nm' }, g, x.n); el('text', { x:CX0 + 40, y:y + 12, class:'sc' }, g, x.sc);
+    const col = x.p.length ? IM_PARTY[x.p[0]].c : (x.pi.length ? IM_PARTY[x.pi[0]].c : '--ink');
+    x.p.concat(x.pi).forEach(pk => { const e = el('path', { d:curve(LX + LW, pY[pk], CX0, y), class:'im-edge' + (x.pi.includes(pk) ? ' inf' : ''), style:`stroke:var(${IM_PARTY[pk].c})` }, gEdges); edges.push({ e, i, p:pk }); });
+    x.m.concat(x.mi).forEach(mk => { const e = el('path', { d:curve(CX1, y, RX, mY[mk]), class:'im-edge' + (x.mi.includes(mk) ? ' inf' : ''), style:`stroke:var(${col})` }, gEdges); edges.push({ e, i, m:mk }); });
+    terms.push(g);
+  });
+  let active = null;
+  const clear = () => { svg.classList.remove('dim'); svg.querySelectorAll('.on').forEach(n => n.classList.remove('on')); };
+  const light = set => { svg.classList.add('dim'); set.forEach(i => { terms[i].classList.add('on'); edges.forEach(ed => { if (ed.i === i) { ed.e.classList.add('on'); if (ed.p) leftNodes[ed.p].classList.add('on'); if (ed.m) rightNodes[ed.m].classList.add('on'); } }); }); };
+  const apply = () => { clear(); if (!active) return; const set = []; I.forEach((x, i) => { const hit = active.t === 'm' ? x.m.concat(x.mi).includes(active.k) : x.p.concat(x.pi).includes(active.k); if (hit) set.push(i); }); light(set); };
+  terms.forEach((g, i) => { const on = () => { clear(); light([i]); }; g.addEventListener('mouseenter', on); g.addEventListener('mouseleave', apply); g.addEventListener('focus', on); g.addEventListener('blur', apply); });
+  const fw = $('#im-filters');
+  const sync = () => fw.querySelectorAll('.chip').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.k === '' ? !active : !!(active && active.t === 'm' && active.k === b.dataset.k))));
+  const setF = (t, k) => { active = (active && active.t === t && active.k === k) ? null : { t, k }; apply(); sync(); };
+  Object.keys(leftNodes).forEach(k => leftNodes[k].addEventListener('click', () => setF('p', k)));
+  Object.keys(rightNodes).forEach(k => rightNodes[k].addEventListener('click', () => setF('m', k)));
+  fw.innerHTML = `<button type="button" class="chip" data-k="">Semua</button>` + mKeys.map(k => `<button type="button" class="chip" data-k="${k}">${IM_MOD[k].label}</button>`).join('');
+  fw.addEventListener('click', e => { const b = e.target.closest('.chip'); if (!b) return; if (b.dataset.k === '') { active = null; apply(); sync(); } else setF('m', b.dataset.k); });
+  sync();
+}
+
 /* ---------- Router ---------- */
-const TITLES = { shop:'Shop', how:'How to order', cart:'Your cart', checkout:'Checkout', order:'Your order', support:'Support', coex:'Case WA Coex', tutorial:'Tutorial', flow:'WA API Flow Setting', contact:'Contact', webchat:'Web Chat' };
+const TITLES = { shop:'Shop', how:'How to order', cart:'Your cart', checkout:'Checkout', order:'Your order', support:'Support', coex:'Case WA Coex', tutorial:'Tutorial', flow:'WA API Flow Setting', contact:'Contact', webchat:'Web Chat', map:'Map Integration' };
 function render(fresh) {
   const parts = location.hash.replace(/^#\/?/, '').split('/').filter(Boolean).map(decodeURIComponent);
   const [a, b] = parts;
@@ -2610,6 +2825,8 @@ function render(fresh) {
     case 'order': html = orderView(b || ''); title = TITLES.order + ' | Activation Qontak'; break;
     case 'support': html = supportView(); title = TITLES.support + ' | Activation Qontak'; break;
     case 'coex': html = window.COEX ? COEX.view(b) : notFoundView(); title = TITLES.coex + ' | Activation Qontak'; break;
+    case 'map': html = imView(); title = TITLES.map + ' | Activation Qontak'; break;
+    case 'proposal': html = proposalShell(); break;
     case 'webchat': html = webchatView(); title = TITLES.webchat + ' | Activation Qontak'; break;
     case 'contact': html = contactView(); title = TITLES.contact + ' | Activation Qontak'; break;
     case 'help': html = hcArticleView(b || ''); title = (hcTitle(b) || 'Help Center') + ' | Activation Qontak'; break;
@@ -2630,6 +2847,8 @@ function render(fresh) {
   if (a === 'flow') mountFlow();
   if (a === 'help') mountHelp();
   if (a === 'webchat') wcMount();
+  if (a === 'map') imMount();
+  if (a === 'proposal') mountProposal(b || '');
   document.body.dataset.route = a || 'home';
   if (gsAfter) { const f = gsAfter; gsAfter = null; setTimeout(f, 80); }
   if (a === 'tutorial' && sessionHcJump) { sessionHcJump = false; const h = $('#help-center'); if (h) setTimeout(() => h.scrollIntoView({ block:'start' }), 0); }
