@@ -2732,7 +2732,7 @@ function imView() {
   const pill = (k, lbl, color, inf) => `<span class="im-pill${inf ? ' inf' : ''}" style="color:${color}" title="${inf ? 'Perlu dicek per project' : ''}">${esc(lbl)}${inf ? ' ?' : ''}</span>`;
   return `<section class="section"><div class="wrap">
     <div class="section-head"><div><h1>Map Integration</h1>
-      <p class="muted" style="margin:8px 0 0">Peta ${IM_ITEMS.length} integrasi yang biasa di-setup tim Activation: sistem di luar Qontak di kiri, titik integrasi di tengah, modul Qontak di kanan.</p></div></div>
+      <p class="muted" style="margin:8px 0 0">List yang integrasi yang pernah dan biasa dilakukan.</p></div></div>
     <div class="im-card">
       <div class="im-bar"><span class="im-lbl">Warna kabel = pihak</span>
         ${[['--im-meta','Meta'],['--im-chan','Channel lain'],['--im-google','Google'],['--im-mekari','Ekosistem Mekari'],['--im-client','Sistem Client'],['--im-b3','B3'],['--im-desty','Desty']].map(([c, l]) => `<span class="im-cable" style="color:var(${c})"><i></i><span>${l}</span></span>`).join('')}
